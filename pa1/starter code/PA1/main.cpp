@@ -1,3 +1,13 @@
+/*
+Assignment: PA1
+Description: Perform various image effects on ppm images.
+Author: Michael Cottrell
+HSU ID: 946839472
+Completion Time: (Total Hours)
+In completing this program, I received help from the following people:
+Adam Carter
+*/
+
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -10,11 +20,23 @@
 #include "RemoveRedImageEffect.h"
 #include "RemoveGreenImageEffect.h"
 #include "RemoveBlueImageEffect.h"
+#include "NegateRedImageEffect.h"
+#include "NegateGreenImageEffect.h"
+#include "NegateBlueImageEffect.h"
+//#include "RandomNoiseImageEffect.h"
+//#include "HighContrastImageEffect.h"
+//#include "GrayScaleImageEffect.h"
+//#include "HorizontalFlipImageEffect.h"
+//#include "VerticalFlipImageEffect.h"
+//#include "RotateNinetyDegreesImageEffect.h"
+//#include "BlurImageEffect.h"
+//#include "PixelateImageEffect.h"
 
 using namespace std;
 
-enum colors_t { RED = 0, GREEN, BLUE };
-enum menu_options_t {REMOVE_RED = 1, REMOVE_GREEN = 2, REMOVE_BLUE = 3}; //PA1 TODO: fill in the rest
+enum colors_t { RED = 0, GREEN, BLUE};
+enum menu_options_t {REMOVE_RED = 1, REMOVE_GREEN = 2, REMOVE_BLUE = 3, NEGATE_RED = 4, NEGATE_GREEN = 5, NEGATE_BLUE = 6, ADD_RANDOM_NOISE = 7, HIGH_CONTRAST = 8, 
+					 GRAY_SCALE = 9, HORIZONTAL_FLIP = 10, VERTICAL_FLIP = 11, ROTATE_90 = 12, BLUR_IMAGE = 13, PIXELATE_IMAGE = 14}; 
 PpmDocument ppmDocumentFromFile(string file_name);
 void ppmDocumentToFile(PpmDocument &doc, string file_name);
 menu_options_t getMenuSelection();
@@ -137,8 +159,8 @@ void ppmDocumentToFile(PpmDocument &doc, string file_name)
 }
 menu_options_t getMenuSelection()
 {
-    //PA1 TODO: fill in the rest
-    vector<string> menu_options{ "", "Remove red", "Remove green", "Remove blue"};
+    vector<string> menu_options{"", "Remove red", "Remove green", "Remove blue", "Negate red", "Negate green", "Negate blue", "Add random noise", "High contrast",
+								"Gray scale", "Horizontal flip", "Vertical flip", "Rotate 90 degrees", "Blur image", "Pixelate image"};
     cout << "***Effect Menu***" << endl;
     for (int i = 1; i < menu_options.size(); i++)
     {
@@ -155,7 +177,6 @@ menu_options_t getMenuSelection()
 void applyImageEffect(PpmDocument &doc, menu_options_t option)
 {
 
-	//PA #1 TODO: finish
     ImageEffect *effect = nullptr;
     switch (option)
     {
@@ -170,6 +191,51 @@ void applyImageEffect(PpmDocument &doc, menu_options_t option)
 	case REMOVE_BLUE:
 		effect = new RemoveBlueImageEffect();
 	    break;
+
+	case NEGATE_RED:
+		effect = new NegateRedImageEffect();
+		break;
+
+	case NEGATE_GREEN:
+		effect = new NegateGreenImageEffect();
+		break;
+
+	case NEGATE_BLUE:
+		effect = new NegateBlueImageEffect();
+		break;
+
+	case ADD_RANDOM_NOISE:
+	//	effect = new RandomNoiseImageEffect();
+		break;
+
+	case HIGH_CONTRAST:
+	//	effect = new HighContrastImageEffect();
+		break;
+
+	case GRAY_SCALE:
+	//	effect = new GrayScaleImageEffect();
+		break;
+
+	case HORIZONTAL_FLIP:
+	//	effect = new HorizontalFlipImageEffect();
+		break;
+
+	case VERTICAL_FLIP:
+	//	effect = new VerticalFlipImageEffect();
+		break;
+
+	case ROTATE_90:
+	//	effect = new RotateNinetyDegreesImageEffect();
+		break;
+
+	case BLUR_IMAGE:
+	//	effect = new BlurImageEffect();
+		break;
+
+	case PIXELATE_IMAGE:
+	//	effect = new PixelateImageEffect();
+		break;
+
     }
 
     if (effect != nullptr)

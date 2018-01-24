@@ -144,6 +144,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ImageEffect.h" />
+    <ClInclude Include="NegateBlueImageEffect.h" />
+    <ClInclude Include="NegateGreenImageEffect.h" />
+    <ClInclude Include="NegateRedImageEffect.h" />
     <ClInclude Include="Pixel.h" />
     <ClInclude Include="PpmDocument.h" />
     <ClInclude Include="RemoveBlueImageEffect.h" />
