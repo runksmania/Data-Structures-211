@@ -9,6 +9,8 @@
 #include "ImageEffect.h"
 #include "RemoveRedImageEffect.h"
 #include "RemoveGreenImageEffect.h"
+#include "RemoveBlueImageEffect.h"
+
 using namespace std;
 
 enum colors_t { RED = 0, GREEN, BLUE };
@@ -164,6 +166,10 @@ void applyImageEffect(PpmDocument &doc, menu_options_t option)
     case REMOVE_GREEN:
         effect = new RemoveGreenImageEffect();
         break;
+
+	case REMOVE_BLUE:
+		effect = new RemoveBlueImageEffect();
+	    break;
     }
 
     if (effect != nullptr)

@@ -146,6 +146,7 @@
     <ClInclude Include="ImageEffect.h" />
     <ClInclude Include="Pixel.h" />
     <ClInclude Include="PpmDocument.h" />
+    <ClInclude Include="RemoveBlueImageEffect.h" />
     <ClInclude Include="RemoveGreenImageEffect.h" />
     <ClInclude Include="RemoveRedImageEffect.h" />
   </ItemGroup>

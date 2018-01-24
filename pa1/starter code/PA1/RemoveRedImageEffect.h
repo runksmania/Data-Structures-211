@@ -23,4 +23,3 @@ class RemoveRedImageEffect : public ImageEffect
 };
 
 #endif // !REMOVE_RED_IMAGE_EFFECT 
-
