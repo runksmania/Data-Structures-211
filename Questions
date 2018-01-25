@@ -1,0 +1,22 @@
+istringstream and cin how do they know ints vs str
+
+Following questions are from lines 60 thru 73 in main:
+  Couldn't we cin >> int variables width, height, rgb?
+  Do we need getline, istringsteam and then use istringstream to >> width, height?  
+  Is there any advantage to doing the way it is in main? Memory, speed? Cleanliness of code? Or negligible either method?
+  My suposition is negligible difference.
+
+Line 122 in main. Why do we not check to see if file opened properly and is writeable?
+
+Pixel::toString why not a void function that uses cout instead of ostringstream?
+
+line 149 main  Why use getline and not just cin, wouldnt that remove the need for stoi and a string variable?  Any advantage?
+
+line 169 main why the need for the if statement?
+
+ppmDoccument questions:
+  Constructor of PpmDocument why are variables initialized? Any benefit to doing this? Or is it just common practice?
+  PpmDocument& operator=(const PpmDocument &other)  https://en.wikipedia.org/wiki/Move_assignment_operator
+    && vs & any difference?
+    Ts it just moving/copying the object?
+  &getPixel.  Why the ampersand?
