@@ -23,9 +23,9 @@ Adam Carter
 #include "NegateRedImageEffect.h"
 #include "NegateGreenImageEffect.h"
 #include "NegateBlueImageEffect.h"
-//#include "RandomNoiseImageEffect.h"
-//#include "HighContrastImageEffect.h"
-//#include "GrayScaleImageEffect.h"
+#include "RandomNoiseImageEffect.h"
+#include "HighContrastImageEffect.h"
+#include "GrayScaleImageEffect.h"
 #include "HorizontalFlipImageEffect.h"
 #include "VerticalFlipImageEffect.h"
 //#include "RotateNinetyDegreesImageEffect.h"
@@ -205,15 +205,15 @@ void applyImageEffect(PpmDocument &doc, menu_options_t option)
 		break;
 
 	case ADD_RANDOM_NOISE:
-	//	effect = new RandomNoiseImageEffect();
+		effect = new RandomNoiseImageEffect();
 		break;
 
 	case HIGH_CONTRAST:
-	//	effect = new HighContrastImageEffect();
+		effect = new HighContrastImageEffect();
 		break;
 
 	case GRAY_SCALE:
-	//	effect = new GrayScaleImageEffect();
+		effect = new GrayScaleImageEffect();
 		break;
 
 	case HORIZONTAL_FLIP:
