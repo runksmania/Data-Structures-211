@@ -143,15 +143,23 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GrayScaleImageEffect.h" />
+    <ClInclude Include="HighContrastImageEffect.h" />
+    <ClInclude Include="RandomNoiseImageEffect.h" />
+    <ClInclude Include="BlurImageEffect.h" />
+    <ClInclude Include="HorizontalFlipImageEffect.h" />
     <ClInclude Include="ImageEffect.h" />
     <ClInclude Include="NegateBlueImageEffect.h" />
     <ClInclude Include="NegateGreenImageEffect.h" />
     <ClInclude Include="NegateRedImageEffect.h" />
     <ClInclude Include="Pixel.h" />
+    <ClInclude Include="PixelateImageEffect.h" />
     <ClInclude Include="PpmDocument.h" />
     <ClInclude Include="RemoveBlueImageEffect.h" />
     <ClInclude Include="RemoveGreenImageEffect.h" />
     <ClInclude Include="RemoveRedImageEffect.h" />
+    <ClInclude Include="RotateNinetyDegreesImageEffect.h" />
+    <ClInclude Include="VerticalFlipImageEffect.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="blocks.ppm" />

@@ -1,6 +1,6 @@
 #pragma once
-#ifndef REMOVE_RED_IMAGE_EFFECT 
-#define REMOVE_RED_IMAGE_EFFECT 
+#ifndef REMOVE_RED_IMAGE_EFFECT_H
+#define REMOVE_RED_IMAGE_EFFECT_H 
 
 #include "ImageEffect.h"
 
@@ -22,4 +22,4 @@ class RemoveRedImageEffect : public ImageEffect
 
 };
 
-#endif // !REMOVE_RED_IMAGE_EFFECT 
+#endif // !REMOVE_RED_IMAGE_EFFECT_H

@@ -26,8 +26,8 @@ Adam Carter
 //#include "RandomNoiseImageEffect.h"
 //#include "HighContrastImageEffect.h"
 //#include "GrayScaleImageEffect.h"
-//#include "HorizontalFlipImageEffect.h"
-//#include "VerticalFlipImageEffect.h"
+#include "HorizontalFlipImageEffect.h"
+#include "VerticalFlipImageEffect.h"
 //#include "RotateNinetyDegreesImageEffect.h"
 //#include "BlurImageEffect.h"
 //#include "PixelateImageEffect.h"
@@ -217,11 +217,11 @@ void applyImageEffect(PpmDocument &doc, menu_options_t option)
 		break;
 
 	case HORIZONTAL_FLIP:
-	//	effect = new HorizontalFlipImageEffect();
+		effect = new HorizontalFlipImageEffect();
 		break;
 
 	case VERTICAL_FLIP:
-	//	effect = new VerticalFlipImageEffect();
+		effect = new VerticalFlipImageEffect();
 		break;
 
 	case ROTATE_90:
