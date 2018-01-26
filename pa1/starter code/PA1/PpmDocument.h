@@ -50,7 +50,7 @@ public:
         }
     }
 
-    //copy move operator
+    //copy operator
     PpmDocument& operator=(const PpmDocument &other)
     {
         _doc_type = other._doc_type;
