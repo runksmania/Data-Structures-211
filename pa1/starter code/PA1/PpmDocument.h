@@ -87,10 +87,14 @@ public:
     void setWidth(int w)
     {
         _width = w;
-        for (auto& row : _pixels)
-        {
-            _pixels.resize(_width);
-        }
+        //for (auto& row : _pixels)
+        //{
+        //    _pixels.resize(_width);
+        //}
+		for (int i = 0; i < _height; i++)
+		{
+			_pixels[i].resize(w);
+		}
         
     }
 
