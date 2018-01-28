@@ -28,7 +28,7 @@ Adam Carter
 #include "GrayScaleImageEffect.h"
 #include "HorizontalFlipImageEffect.h"
 #include "VerticalFlipImageEffect.h"
-//#include "RotateNinetyDegreesImageEffect.h"
+#include "RotateNinetyDegreesImageEffect.h"
 //#include "BlurImageEffect.h"
 //#include "PixelateImageEffect.h"
 
@@ -225,7 +225,7 @@ void applyImageEffect(PpmDocument &doc, menu_options_t option)
 		break;
 
 	case ROTATE_90:
-	//	effect = new RotateNinetyDegreesImageEffect();
+		effect = new RotateNinetyDegreesImageEffect();
 		break;
 
 	case BLUR_IMAGE:
