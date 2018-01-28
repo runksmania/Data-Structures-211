@@ -29,8 +29,8 @@ Adam Carter
 #include "HorizontalFlipImageEffect.h"
 #include "VerticalFlipImageEffect.h"
 #include "RotateNinetyDegreesImageEffect.h"
-//#include "BlurImageEffect.h"
-//#include "PixelateImageEffect.h"
+#include "BlurImageEffect.h"
+#include "PixelateImageEffect.h"
 
 using namespace std;
 
@@ -229,11 +229,11 @@ void applyImageEffect(PpmDocument &doc, menu_options_t option)
 		break;
 
 	case BLUR_IMAGE:
-	//	effect = new BlurImageEffect();
+		effect = new BlurImageEffect();
 		break;
 
 	case PIXELATE_IMAGE:
-	//	effect = new PixelateImageEffect();
+		effect = new PixelateImageEffect();
 		break;
 
     }

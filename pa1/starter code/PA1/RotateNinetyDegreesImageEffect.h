@@ -20,25 +20,20 @@ class RotateNinetyDegreesImageEffect : public ImageEffect
 		height = doc.getHeight();
 		width = doc.getWidth();
 
-		cout << "Doc Width: " << width << " Doc Height: " << height << endl;
-
 		PpmDocument doc_copy(doc);
 
 		doc.setHeight(width);
 		doc.setWidth(height);
 
-		cout << "Doc Width: " << doc.getWidth() << " Doc Height: " << doc.getHeight() << endl;
-		cout << "Doc_copy Width: " << doc_copy.getWidth() << " Doc_copy Height: " << doc_copy.getHeight() << endl;
-
 		if (direction == 1)
 		{
-			for (int i = 0; i < height; i++)
+			for (int i = 0; i < doc_copy.getHeight(); i++)
 			{
-				for (int j = width; j > 0; j--)
+				for (int j = 0; j < doc_copy.getWidth(); j++)
 				{
 					
-					//Pixel rotated_pixel = doc_copy.getPixel(i, j);
-					//doc.setPixel(j, height - i, rotated_pixel);
+					Pixel rotated_pixel = doc_copy.getPixel(i, j);
+					doc.setPixel(width - j - 1, i, rotated_pixel);
 				}
 			}
 		}
