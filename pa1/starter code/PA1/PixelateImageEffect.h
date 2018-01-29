@@ -14,80 +14,91 @@ class PixelateImageEffect : public ImageEffect
 		int pixelation_degree;
 		int width = doc.getWidth();
 		int height = doc.getHeight();
-		cout << "Enter a number from 1 to 5 on how pixelated you want the image to be: ";
+		cout << "Enter a number from 1 to 10 on how pixelated you want the image to be: ";
 		getline(cin, input);
 		pixelation_degree = stoi(input);
 
-		for (int i = 0; i < height; i+= pixelation_degree)
+		if (pixelation_degree > 10 || pixelation_degree < 1)
 		{
-			for (int j = 0; j < width; j+= pixelation_degree)
+			while (pixelation_degree > 10 || pixelation_degree < 1)
+			{
+				cout << "Error. You have entered an incorrect amount. Please try again.\n";
+				cout << "Enter a number from 1 to 10 on how pixelated you want the image to be: ";
+				getline(cin, input);
+				pixelation_degree = stoi(input);
+			}
+		}
+
+		for (int i = 0; i < height; i += pixelation_degree)
+		{
+			for (int j = 0; j < width; j += pixelation_degree)
 			{
 				Pixel the_pixel_to_rule_them_all = doc.getPixel(i, j);
-				int pixels_left_of_ruling_pixel = j - pixelation_degree;
-				int pixels_right_of_ruling_pixel = j + pixelation_degree;
-				int pixels_below_ruling_pixel = i + pixelation_degree;
-				int pixels_above_ruling_pixel = i - pixelation_degree;
+				int pixels_left_of_ruling_pixel, pixels_right_of_ruling_pixel, pixels_below_ruling_pixel, pixels_above_ruling_pixel;
 
-				if ((pixels_left_of_ruling_pixel < 0) || (pixels_right_of_ruling_pixel >= width - 1))
+				if (j - pixelation_degree < 0)
 				{
-					if (pixels_left_of_ruling_pixel < 0)
-					{
-						for (int n = j; n >= 0; n--)
-						{
-							doc.setPixel(i, n, the_pixel_to_rule_them_all);
-
-						}
-					}
-					
-					if (pixels_right_of_ruling_pixel >= width - 1)
-					{
-						for (int n = j; n < width; n++)
-						{
-							doc.setPixel(i, n, the_pixel_to_rule_them_all);
-						}
-					}
+					pixels_left_of_ruling_pixel = 0;
 				}
 				else
 				{
-					for (int n = j; n > pixels_left_of_ruling_pixel; n--)
-					{
-						doc.setPixel(i, n, the_pixel_to_rule_them_all);
-					}
-					
-					for (int n = j; n < pixels_right_of_ruling_pixel; n++)
-					{
-						doc.setPixel(i, n, the_pixel_to_rule_them_all);
-					}
+					pixels_left_of_ruling_pixel = j - pixelation_degree;
 				}
-				
-				if ((pixels_above_ruling_pixel < 0) || (pixels_below_ruling_pixel > height - 1))
+
+				if (j + pixelation_degree >= width)
 				{
-					if (pixels_above_ruling_pixel < 0)
-					{
-						for (int n = i; n >= 0; n--)
-						{
-							doc.setPixel(n, j, the_pixel_to_rule_them_all);
-						}
-					}
-					
-					if (pixels_below_ruling_pixel > height - 1)
-					{
-						for (int n = i; n < height; n++)
-						{
-							doc.setPixel(n, j, the_pixel_to_rule_them_all);
-						}
-					}
+					pixels_right_of_ruling_pixel = width;
 				}
 				else
 				{
-					for (int n = i; n > pixels_above_ruling_pixel; n--)
+					pixels_right_of_ruling_pixel = j + pixelation_degree;
+				}
+
+				if (i + pixelation_degree >= height)
+				{
+					pixels_below_ruling_pixel = height;
+				}
+				else
+				{
+					pixels_below_ruling_pixel = i + pixelation_degree;
+				}
+
+				if (i - pixelation_degree < 0)
+				{
+					pixels_above_ruling_pixel = 0;
+				}
+				else
+				{
+					pixels_above_ruling_pixel = i - pixelation_degree;
+				}
+
+				for (int w = j; w < pixels_right_of_ruling_pixel; w++)
+				{
+					doc.setPixel(i, w, the_pixel_to_rule_them_all);
+
+					for (int h = i; h < pixels_below_ruling_pixel; h++)
 					{
-						doc.setPixel(n, j, the_pixel_to_rule_them_all);
+						doc.setPixel(h, w, the_pixel_to_rule_them_all);
 					}
 
-					for (int n = i; n < pixels_below_ruling_pixel; n++)
+					for (int h = pixels_above_ruling_pixel; h > i; h--)
 					{
-						doc.setPixel(n, j, the_pixel_to_rule_them_all);
+						doc.setPixel(h, w, the_pixel_to_rule_them_all);
+					}
+				}
+
+				for (int w = pixels_left_of_ruling_pixel; w > j; w--)
+				{
+					doc.setPixel(i, w, the_pixel_to_rule_them_all);
+
+					for (int h = i; h < pixels_below_ruling_pixel; h++)
+					{
+						doc.setPixel(h, w, the_pixel_to_rule_them_all);
+					}
+
+					for (int h = pixels_above_ruling_pixel; h > i; h--)
+					{
+						doc.setPixel(h, w, the_pixel_to_rule_them_all);
 					}
 				}
 
