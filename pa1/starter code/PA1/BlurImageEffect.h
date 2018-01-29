@@ -15,6 +15,17 @@ class BlurImageEffect : public ImageEffect
 		cout << "Enter a number from 1 to 10 on how blurry you want the image to be: ";
 		getline(cin, input);
 		blur_degree = stoi(input);
+
+		if (blur_degree > 10 || blur_degree < 1)
+		{
+			while (blur_degree > 10 || blur_degree < 1)
+			{
+				cout << "Error. You have entered an incorrect amount. Please try again.\n";
+				cout << "Enter a number from 1 to 10 on how pixelated you want the image to be: ";
+				getline(cin, input);
+				blur_degree = stoi(input);
+			}
+		}
 		
 		for (int n = 0; n < blur_degree; n++)
 		{

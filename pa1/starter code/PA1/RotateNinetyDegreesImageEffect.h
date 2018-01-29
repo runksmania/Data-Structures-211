@@ -13,9 +13,6 @@ class RotateNinetyDegreesImageEffect : public ImageEffect
 	{
 		string input;
 		int direction, width, height;
-		cout << "Enter 1 to rotate left. Enter 2 to rotate right.\n Which direction: ";
-		getline(cin, input);
-		direction = stoi(input);
 		
 		height = doc.getHeight();
 		width = doc.getWidth();
@@ -24,6 +21,23 @@ class RotateNinetyDegreesImageEffect : public ImageEffect
 
 		doc.setHeight(width);
 		doc.setWidth(height);
+
+		cout << "Enter 1 to rotate left. Enter 2 to rotate right.\n Which direction: ";
+		getline(cin, input);
+		direction = stoi(input);
+
+		if (direction > 2 || direction < 1)
+		{
+			while (direction > 2 || direction < 1)
+			{
+				cout << "Error. You have entered an incorrect amount. Please try again.\n";
+				cout << "Enter 1 to rotate left. Enter 2 to rotate right.\n Which direction: ";
+				getline(cin, input);
+				direction = stoi(input);
+			}
+		}
+		
+		
 
 		if (direction == 1)
 		{
