@@ -1,3 +1,3 @@
 ﻿  main.cpp
-e:\school\data structures cs 211\data-structures-211\pa1\starter code\pa1\randomnoiseimageeffect.h(17): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  PA1.vcxproj -> E:\School\Data Structures CS 211\Data-Structures-211\pa1\starter code\x64\Debug\PA1.exe
+e:\school\data structures cs 211\assignment repositories\assignments\assignment 1\pa1\starter code\pa1\randomnoiseimageeffect.h(27): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  PA1.vcxproj -> E:\School\Data Structures CS 211\Assignment Repositories\Assignments\Assignment 1\pa1\starter code\x64\Debug\PA1.exe

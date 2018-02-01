@@ -1,3 +1,13 @@
+/*
+Assignment: PA1
+Description: Perform various image effects on ppm images.
+Author: Michael Cottrell
+HSU ID: 946839472
+Completion Time: 15 hours.
+In completing this program, I received help from the following people:
+Adam Carter
+*/
+
 #pragma once
 #ifndef HIGH_CONTRAST_IMAGE_EFFECT_H
 #define HIGH_CONTRAST_IMAGE_EFFECT_H
@@ -6,6 +16,7 @@
 
 using namespace std;
 
+//This image effect will round up or down to max pixel value if it is lower or greater than half value.
 class HighContrastImageEffect : public ImageEffect
 {
 	virtual void processImage(PpmDocument &doc)

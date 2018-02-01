@@ -1,3 +1,13 @@
+/*
+Assignment: PA1
+Description: Perform various image effects on ppm images.
+Author: Michael Cottrell
+HSU ID: 946839472
+Completion Time: 15 hours.
+In completing this program, I received help from the following people:
+Adam Carter
+*/
+
 #pragma once
 #ifndef PIXELATE_IMAGE_EFFECT_H
 #define PIXELATE_IMAGE_EFFECT_H
@@ -6,6 +16,7 @@
 
 using namespace std;
 
+//This image effect will pixelate an image.
 class PixelateImageEffect : public ImageEffect
 {
 	virtual void processImage(PpmDocument &doc)

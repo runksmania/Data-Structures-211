@@ -1,9 +1,20 @@
+/*
+Assignment: PA1
+Description: Perform various image effects on ppm images.
+Author: Michael Cottrell
+HSU ID: 946839472
+Completion Time: 15 hours.
+In completing this program, I received help from the following people:
+Adam Carter
+*/
+
 #pragma once
 #ifndef NEGATE_BLUE_IMAGE_EFFECT_H
 #define NEGATE_BLUE_IMAGE_EFFECT_H
 
 #include "ImageEffect.h"
 
+//This image effect will negate blue from an image.
 class NegateBlueImageEffect : public ImageEffect
 {
 	virtual void processImage(PpmDocument &doc)
