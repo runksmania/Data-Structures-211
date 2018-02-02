@@ -3,7 +3,7 @@ Assignment: PA1
 Description: Perform various image effects on ppm images.
 Author: Michael Cottrell
 HSU ID: 946839472
-Completion Time: (Total Hours)
+Completion Time: 15 hours.
 In completing this program, I received help from the following people:
 Adam Carter
 */
