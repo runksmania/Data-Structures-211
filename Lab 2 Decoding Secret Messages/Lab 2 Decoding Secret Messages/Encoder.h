@@ -15,10 +15,16 @@ public:
 	{
 		string message = message_to_encode;
 		int counter = message.size() - 1;
+<<<<<<< HEAD
 		int prev_x_coord, prev_y_coord, rand_x_coord, rand_y_coord;
 		int height = doc.getHeight();
 		int width = doc.getWidth();
 		Pixel pixel_to_encode = doc.getPixel(0,0);
+=======
+		int prev_x_coord, prev_y_coord;
+		int i = doc.getHeight() - 1;
+		Pixel &pixel_to_encode = doc.getPixel(0,0);
+>>>>>>> parent of 548c118... Finalized the following solution:
 
 		srand(time(NULL));
 
@@ -41,6 +47,7 @@ public:
 
 				if (counter == message.size() - 1)
 				{
+<<<<<<< HEAD
 					pixel_to_encode = doc.getPixel(rand_y_coord, rand_x_coord);
 					pixel_to_encode.setRed(message[counter]);
 					pixel_to_encode.setGreen(0);
@@ -48,8 +55,18 @@ public:
 					doc.setPixel(rand_y_coord, rand_x_coord, pixel_to_encode);
 					prev_x_coord = rand_x_coord;
 					prev_y_coord = rand_y_coord;
+=======
+					pixel_to_encode = doc.getPixel(0, 0);
+					pixel_to_encode.setRed(message[0]);
+					pixel_to_encode.setGreen(prev_x_coord);
+					pixel_to_encode.setBlue(prev_y_coord);
+					cout << "Message counter: " << message[counter] << endl;
+					cout << "I: " << i << " J: " << j << endl;
+					cout << "Previous x coord: " << prev_x_coord << " Previous y coord: " << prev_y_coord << endl << endl;
+>>>>>>> parent of 548c118... Finalized the following solution:
 					counter--;
 				}
+<<<<<<< HEAD
 				else
 				{
 					pixel_to_encode = doc.getPixel(rand_y_coord, rand_x_coord);
@@ -60,6 +77,36 @@ public:
 					prev_x_coord = rand_x_coord;
 					prev_y_coord = rand_y_coord;
 					counter--;
+=======
+				else if ((counter >= 0 ) && ((i + j) % 3 == 1))
+				{
+					if (counter == message.size() - 1)
+					{
+						pixel_to_encode = doc.getPixel(i, j);
+						pixel_to_encode.setRed(message[counter]);
+						pixel_to_encode.setGreen(0);
+						pixel_to_encode.setBlue(0);
+						prev_x_coord = i;
+						prev_y_coord = j;
+						counter--;
+						cout << "Message counter: " << message[counter] << endl;
+						cout << "I: " << i << " J: " << j << endl;
+						cout << "Previous x coord: " << prev_x_coord << " Previous y coord: " << prev_y_coord << endl << endl;
+					}
+					else
+					{
+						pixel_to_encode = doc.getPixel(i, j);
+						pixel_to_encode.setRed(message[counter]);
+						pixel_to_encode.setGreen(prev_x_coord);
+						pixel_to_encode.setBlue(prev_y_coord);
+						prev_x_coord = i;
+						prev_y_coord = j;
+						counter--;
+						cout << "Message counter: " << message[counter] << endl;
+						cout << "I: " << i << " J: " << j << endl;
+						cout << "Previous x coord: " << prev_x_coord << " Previous y coord: " << prev_y_coord << endl << endl;
+					}
+>>>>>>> parent of 548c118... Finalized the following solution:
 				}
 			}
 		}

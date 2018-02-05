@@ -14,17 +14,17 @@ public:
 		
 		Pixel pixel_to_decode = doc.getPixel(0, 0);
 		int character = pixel_to_decode.getRed();
-		int y_coord = pixel_to_decode.getGreen();
-		int x_coord = pixel_to_decode.getBlue();
+		int x_coord = pixel_to_decode.getGreen();
+		int y_coord = pixel_to_decode.getBlue();
 		decoded += character;
 		
 		while (x_coord != 0 && y_coord != 0)
 		{
-			pixel_to_decode = doc.getPixel(y_coord, x_coord);
+			pixel_to_decode = doc.getPixel(x_coord, y_coord);
 			character = pixel_to_decode.getRed();
 			decoded += character;
-			y_coord = pixel_to_decode.getGreen();
-			x_coord = pixel_to_decode.getBlue();
+			x_coord = pixel_to_decode.getGreen();
+			y_coord = pixel_to_decode.getBlue();
 		}
 
 		return decoded;
