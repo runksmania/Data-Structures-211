@@ -15,6 +15,7 @@ public:
 		int counter = message.size() - 1;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		int prev_x_coord, prev_y_coord, rand_x_coord, rand_y_coord;
 		int height = doc.getHeight();
 		int width = doc.getWidth();
@@ -23,6 +24,11 @@ public:
 		int i = doc.getHeight() - 1;
 >>>>>>> parent of e222f4f... Added Random Encoding to:
 		Pixel pixel_to_encode = doc.getPixel(0,0);
+=======
+		int prev_x_coord, prev_y_coord;
+		int i = doc.getHeight() - 1;
+		Pixel &pixel_to_encode = doc.getPixel(0,0);
+>>>>>>> parent of 548c118... Finalized the following solution:
 =======
 		int prev_x_coord, prev_y_coord;
 		int i = doc.getHeight() - 1;
@@ -64,12 +70,13 @@ public:
 				if (counter == 0)
 >>>>>>> parent of e222f4f... Added Random Encoding to:
 				{
-					message_int = message[counter];
 					pixel_to_encode = doc.getPixel(0, 0);
-					pixel_to_encode.setRed(message_int);
-					pixel_to_encode.setGreen(prev_y_coord);
-					pixel_to_encode.setBlue(prev_x_coord);
-					doc.setPixel(0, 0, pixel_to_encode);
+					pixel_to_encode.setRed(message[0]);
+					pixel_to_encode.setGreen(prev_x_coord);
+					pixel_to_encode.setBlue(prev_y_coord);
+					cout << "Message counter: " << message[counter] << endl;
+					cout << "I: " << i << " J: " << j << endl;
+					cout << "Previous x coord: " << prev_x_coord << " Previous y coord: " << prev_y_coord << endl << endl;
 					counter--;
 <<<<<<< HEAD
 =======
@@ -106,31 +113,33 @@ public:
 					break;
 >>>>>>> parent of e222f4f... Added Random Encoding to:
 				}
-				else if ((counter > 0 ) && ((i + j) % 3 == 0))
+				else if ((counter >= 0 ) && ((i + j) % 3 == 1))
 				{
 					if (counter == message.size() - 1)
 					{
-						message_int = message[counter];
 						pixel_to_encode = doc.getPixel(i, j);
-						pixel_to_encode.setRed(message_int);
+						pixel_to_encode.setRed(message[counter]);
 						pixel_to_encode.setGreen(0);
 						pixel_to_encode.setBlue(0);
-						doc.setPixel(i, j, pixel_to_encode);
-						prev_x_coord = j;
-						prev_y_coord = i;
+						prev_x_coord = i;
+						prev_y_coord = j;
 						counter--;
+						cout << "Message counter: " << message[counter] << endl;
+						cout << "I: " << i << " J: " << j << endl;
+						cout << "Previous x coord: " << prev_x_coord << " Previous y coord: " << prev_y_coord << endl << endl;
 					}
 					else
 					{
-						message_int = message[counter];
 						pixel_to_encode = doc.getPixel(i, j);
-						pixel_to_encode.setRed(message_int);
-						pixel_to_encode.setGreen(prev_y_coord);
-						pixel_to_encode.setBlue(prev_x_coord);
-						doc.setPixel(i, j, pixel_to_encode);
-						prev_x_coord = j;
-						prev_y_coord = i;
+						pixel_to_encode.setRed(message[counter]);
+						pixel_to_encode.setGreen(prev_x_coord);
+						pixel_to_encode.setBlue(prev_y_coord);
+						prev_x_coord = i;
+						prev_y_coord = j;
 						counter--;
+						cout << "Message counter: " << message[counter] << endl;
+						cout << "I: " << i << " J: " << j << endl;
+						cout << "Previous x coord: " << prev_x_coord << " Previous y coord: " << prev_y_coord << endl << endl;
 					}
 				}
 
