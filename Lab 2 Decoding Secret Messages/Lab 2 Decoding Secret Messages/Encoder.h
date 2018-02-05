@@ -16,8 +16,10 @@ public:
 		string message = message_to_encode;
 		int counter = message.size() - 1;
 		int prev_x_coord, prev_y_coord, rand_x_coord, rand_y_coord;
-		int height = doc.getHeight();
-		int width = doc.getWidth();
+		
+		//The following height and width variables are set to height/width - 1 so that we can add 1 when we get rand number so we don't use 0, 0 for encoding messages until the final letter of the message.
+		int height = doc.getHeight() - 1;
+		int width = doc.getWidth() - 1;
 		Pixel pixel_to_encode = doc.getPixel(0,0);
 
 		srand(time(NULL));
@@ -36,8 +38,8 @@ public:
 			}
 			else
 			{
-				rand_x_coord = rand() % width;
-				rand_y_coord = rand() % height;
+				rand_x_coord = (rand() % width) + 1;
+				rand_y_coord = (rand() % height) + 1;
 
 				if (counter == message.size() - 1)
 				{
