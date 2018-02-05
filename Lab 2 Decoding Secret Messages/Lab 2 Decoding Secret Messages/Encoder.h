@@ -13,9 +13,9 @@ public:
 	{
 		string message = message_to_encode;
 		int counter = message.size() - 1;
-		int prev_x_coord, prev_y_coord;
+		int prev_x_coord, prev_y_coord, message_int;
 		int i = doc.getHeight() - 1;
-		Pixel &pixel_to_encode = doc.getPixel(0,0);
+		Pixel pixel_to_encode = doc.getPixel(0,0);
 
 		while(counter > -1)
 		{
@@ -23,43 +23,40 @@ public:
 			{
 				if (counter == 0)
 				{
+					message_int = message[counter];
 					pixel_to_encode = doc.getPixel(0, 0);
-					pixel_to_encode.setRed(message[0]);
-					pixel_to_encode.setGreen(prev_x_coord);
-					pixel_to_encode.setBlue(prev_y_coord);
-					cout << "Message counter: " << message[counter] << endl;
-					cout << "I: " << i << " J: " << j << endl;
-					cout << "Previous x coord: " << prev_x_coord << " Previous y coord: " << prev_y_coord << endl << endl;
+					pixel_to_encode.setRed(message_int);
+					pixel_to_encode.setGreen(prev_y_coord);
+					pixel_to_encode.setBlue(prev_x_coord);
+					doc.setPixel(0, 0, pixel_to_encode);
 					counter--;
 					break;
 				}
-				else if ((counter >= 0 ) && ((i + j) % 3 == 1))
+				else if ((counter > 0 ) && ((i + j) % 3 == 0))
 				{
 					if (counter == message.size() - 1)
 					{
+						message_int = message[counter];
 						pixel_to_encode = doc.getPixel(i, j);
-						pixel_to_encode.setRed(message[counter]);
+						pixel_to_encode.setRed(message_int);
 						pixel_to_encode.setGreen(0);
 						pixel_to_encode.setBlue(0);
-						prev_x_coord = i;
-						prev_y_coord = j;
+						doc.setPixel(i, j, pixel_to_encode);
+						prev_x_coord = j;
+						prev_y_coord = i;
 						counter--;
-						cout << "Message counter: " << message[counter] << endl;
-						cout << "I: " << i << " J: " << j << endl;
-						cout << "Previous x coord: " << prev_x_coord << " Previous y coord: " << prev_y_coord << endl << endl;
 					}
 					else
 					{
+						message_int = message[counter];
 						pixel_to_encode = doc.getPixel(i, j);
-						pixel_to_encode.setRed(message[counter]);
-						pixel_to_encode.setGreen(prev_x_coord);
-						pixel_to_encode.setBlue(prev_y_coord);
-						prev_x_coord = i;
-						prev_y_coord = j;
+						pixel_to_encode.setRed(message_int);
+						pixel_to_encode.setGreen(prev_y_coord);
+						pixel_to_encode.setBlue(prev_x_coord);
+						doc.setPixel(i, j, pixel_to_encode);
+						prev_x_coord = j;
+						prev_y_coord = i;
 						counter--;
-						cout << "Message counter: " << message[counter] << endl;
-						cout << "I: " << i << " J: " << j << endl;
-						cout << "Previous x coord: " << prev_x_coord << " Previous y coord: " << prev_y_coord << endl << endl;
 					}
 				}
 
