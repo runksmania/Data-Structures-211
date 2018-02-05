@@ -1,3 +1,13 @@
+/*
+Assignment: PA1
+Description: Perform various image effects on ppm images.
+Author: Michael Cottrell
+HSU ID: 946839472
+Completion Time: 15 hours.
+In completing this program, I received help from the following people:
+Adam Carter
+*/
+
 #pragma once
 #ifndef ROTATE_NINETY_DEGREES_IMAGE_EFFECT_H
 #define ROTATE_NINETY_DEGREES_IMAGE_EFFECT_H

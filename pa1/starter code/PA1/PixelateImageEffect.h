@@ -1,3 +1,13 @@
+/*
+Assignment: PA1
+Description: Perform various image effects on ppm images.
+Author: Michael Cottrell
+HSU ID: 946839472
+Completion Time: 15 hours.
+In completing this program, I received help from the following people:
+Adam Carter
+*/
+
 #pragma once
 #ifndef PIXELATE_IMAGE_EFFECT_H
 #define PIXELATE_IMAGE_EFFECT_H
@@ -6,6 +16,7 @@
 
 using namespace std;
 
+//This image effect will pixelate an image.
 class PixelateImageEffect : public ImageEffect
 {
 	virtual void processImage(PpmDocument &doc)
@@ -34,6 +45,9 @@ class PixelateImageEffect : public ImageEffect
 			for (int j = 0; j < width; j += pixelation_degree)
 			{
 				Pixel the_pixel_to_rule_them_all = doc.getPixel(i, j);
+
+				//The following variables will be the numbers to set the limits of the for loops that will set pixels = to the_pixel_to_rule_them_all.
+				//This ensures that there will be no out of bounds errors on the vector for pixels.
 				int pixels_left_of_ruling_pixel, pixels_right_of_ruling_pixel, pixels_below_ruling_pixel, pixels_above_ruling_pixel;
 
 				if (j - pixelation_degree < 0)
