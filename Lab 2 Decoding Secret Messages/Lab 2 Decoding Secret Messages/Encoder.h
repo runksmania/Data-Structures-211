@@ -3,8 +3,6 @@
 #define ENCODER_H
 
 #include "PpmDocument.h"
-#include <cstdlib>
-#include <time.h>
 
 using namespace std;
 
@@ -16,9 +14,14 @@ public:
 		string message = message_to_encode;
 		int counter = message.size() - 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		int prev_x_coord, prev_y_coord, rand_x_coord, rand_y_coord;
 		int height = doc.getHeight();
 		int width = doc.getWidth();
+=======
+		int prev_x_coord, prev_y_coord, message_int;
+		int i = doc.getHeight() - 1;
+>>>>>>> parent of e222f4f... Added Random Encoding to:
 		Pixel pixel_to_encode = doc.getPixel(0,0);
 =======
 		int prev_x_coord, prev_y_coord;
@@ -26,22 +29,11 @@ public:
 		Pixel &pixel_to_encode = doc.getPixel(0,0);
 >>>>>>> parent of 548c118... Finalized the following solution:
 
-		srand(time(NULL));
-
 		while(counter > -1)
 		{
-			if (counter == 0)
+			for (int j = doc.getWidth() - 1; j > -1; j--)
 			{
-				pixel_to_encode = doc.getPixel(0, 0);
-				pixel_to_encode.setRed(message[counter]);
-				pixel_to_encode.setGreen(prev_y_coord);
-				pixel_to_encode.setBlue(prev_x_coord);
-				doc.setPixel(0, 0, pixel_to_encode);
-				counter--;
-				break;
-			}
-			else
-			{
+<<<<<<< HEAD
 				rand_x_coord = rand() % width;
 				rand_y_coord = rand() % height;
 
@@ -68,15 +60,18 @@ public:
 				}
 <<<<<<< HEAD
 				else
+=======
+				if (counter == 0)
+>>>>>>> parent of e222f4f... Added Random Encoding to:
 				{
-					pixel_to_encode = doc.getPixel(rand_y_coord, rand_x_coord);
-					pixel_to_encode.setRed(message[counter]);
+					message_int = message[counter];
+					pixel_to_encode = doc.getPixel(0, 0);
+					pixel_to_encode.setRed(message_int);
 					pixel_to_encode.setGreen(prev_y_coord);
 					pixel_to_encode.setBlue(prev_x_coord);
-					doc.setPixel(rand_y_coord, rand_x_coord, pixel_to_encode);
-					prev_x_coord = rand_x_coord;
-					prev_y_coord = rand_y_coord;
+					doc.setPixel(0, 0, pixel_to_encode);
 					counter--;
+<<<<<<< HEAD
 =======
 				else if ((counter >= 0 ) && ((i + j) % 3 == 1))
 				{
@@ -107,8 +102,41 @@ public:
 						cout << "Previous x coord: " << prev_x_coord << " Previous y coord: " << prev_y_coord << endl << endl;
 					}
 >>>>>>> parent of 548c118... Finalized the following solution:
+=======
+					break;
+>>>>>>> parent of e222f4f... Added Random Encoding to:
 				}
+				else if ((counter > 0 ) && ((i + j) % 3 == 0))
+				{
+					if (counter == message.size() - 1)
+					{
+						message_int = message[counter];
+						pixel_to_encode = doc.getPixel(i, j);
+						pixel_to_encode.setRed(message_int);
+						pixel_to_encode.setGreen(0);
+						pixel_to_encode.setBlue(0);
+						doc.setPixel(i, j, pixel_to_encode);
+						prev_x_coord = j;
+						prev_y_coord = i;
+						counter--;
+					}
+					else
+					{
+						message_int = message[counter];
+						pixel_to_encode = doc.getPixel(i, j);
+						pixel_to_encode.setRed(message_int);
+						pixel_to_encode.setGreen(prev_y_coord);
+						pixel_to_encode.setBlue(prev_x_coord);
+						doc.setPixel(i, j, pixel_to_encode);
+						prev_x_coord = j;
+						prev_y_coord = i;
+						counter--;
+					}
+				}
+
 			}
+			
+			i--;
 		}
 
 	}
