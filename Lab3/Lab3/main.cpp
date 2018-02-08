@@ -10,7 +10,7 @@ double performOperation(double left_num, double right_num, string operator_to_op
 
 using namespace std;
 
-int main(void) 
+int main(void)
 {
 	//prompt user for file to open
 	string file_to_open;
@@ -21,10 +21,10 @@ int main(void)
 	ifstream input_file{ file_to_open };
 
 	//safety checking
-	if (input_file.is_open()) 
+	if (input_file.is_open())
 	{
 		//read from the file as long as more content is available
-		while(input_file.good())
+		while (input_file.good())
 		{
 			string current_line;
 			getline(input_file, current_line);
@@ -57,7 +57,7 @@ double evaluatePostFixExpression(string postfix_string)
 
 	for (auto piece : pieces)
 	{
-		if (1 == 0)
+		if (isalpha(piece[0]) != 0)
 		{
 			return -1;
 		}
@@ -71,7 +71,7 @@ double evaluatePostFixExpression(string postfix_string)
 			{
 				double right_num = postfix_stack.top();
 				postfix_stack.pop();
-				
+
 				double left_num = postfix_stack.top();
 				postfix_stack.pop();
 
