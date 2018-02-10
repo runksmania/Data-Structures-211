@@ -27,10 +27,10 @@ MazeSolver::MazeSolver()
 			_width = stoi(dimensions[0]);
 
 			//Resize vector to maze dimensions
-			_mazeVector.resize(_height);
+			_maze_vector.resize(_height);
 			for (int i = 0; i < _height; i++)
 			{
-				_mazeVector[i].resize(_width);
+				_maze_vector[i].resize(_width);
 			}
 
 			int row_counter = 0;
@@ -44,7 +44,12 @@ MazeSolver::MazeSolver()
 
 				for (int i = 0; i < _width; i++)
 				{
-					_mazeVector[row_counter][i] = mazeRow[i];
+					if (mazeRow[i] == "o")
+					{
+						_start_location_x = i;
+						_start_location_y = row_counter;
+					}
+					_maze_vector[row_counter][i] = mazeRow[i];
 				}
 				row_counter++;
 			}
@@ -66,8 +71,98 @@ void MazeSolver::printMaze()
 	{
 		for (int j = 0; j < _width; j++)
 		{
-			cout << _mazeVector[i][j];
+			cout << _maze_vector[i][j];
 		}
 		cout << endl;
 	}
+}
+
+void MazeSolver::solveMaze()
+{
+	string search_decision = "";
+	cout << "How would you like to solve the maze?\n Enter 1 for Breadth First Search. Enter 2 for Depth First Search.\n How do you want to solve: ";
+	getline(cin, search_decision);
+
+	if (search_decision == "1")
+	{
+		breadthSearch();
+	}
+	else
+	{
+		depthSearch();
+	}
+}
+
+void MazeSolver::breadthSearch()
+{
+	bool maze_unsolved = true;
+	int direction = 0;
+	int test_count = 0;
+	int current_x = _start_location_x;
+	int current_y = _start_location_y;
+	string current_space = _maze_vector[current_y][current_x];
+
+	while (maze_unsolved)
+	{
+		switch(direction){
+
+		case 0:
+			if (current_space == "." || current_space == "o")
+			{
+
+			}
+			direction++;
+			test_count++;
+			break;
+
+		case 1:
+			cout << "case: 1" << endl;
+			direction++;
+			test_count++;
+			break;
+
+		case 2:
+			cout << "case: 2" << endl;
+			direction++;
+			test_count++;
+			break;
+
+		case 3:
+			cout << "case: 3" << endl;
+			direction++;
+			test_count++;
+			break;
+		}
+		
+		direction %= 4;
+
+		if (test_count == 8)
+		{
+			maze_unsolved = false;
+		}
+	}
+	
+
+}
+
+void MazeSolver::depthSearch()
+{
+
+}
+
+bool MazeSolver::isOpenSpace(string spot_to_check)
+{
+	bool is_open_space = false;
+	
+	if (spot_to_check == ".")
+	{
+		is_open_space = true;
+	}
+	else
+	{
+		is_open_space = false;
+	}
+
+	return is_open_space;
+	
 }

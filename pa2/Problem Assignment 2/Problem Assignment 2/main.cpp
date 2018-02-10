@@ -11,5 +11,7 @@ int main(void)
 	MazeSolver mazeSolver;
 	mazeSolver.printMaze();
 
+	mazeSolver.solveMaze();
+
 	return 0;
 }
