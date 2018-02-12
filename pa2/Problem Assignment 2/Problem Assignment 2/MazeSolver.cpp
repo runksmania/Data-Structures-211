@@ -39,22 +39,21 @@ MazeSolver::MazeSolver()
 			while (input_file.good())
 			{
 				getline(input_file, current_line);
-				cout << current_line << endl;
-				vector<string> mazeRow = StringSplitter::split(current_line, " ");
+				//cout << current_line << endl;
+				vector<string> maze_row = StringSplitter::split(current_line, " ");
 
 				for (int i = 0; i < _width; i++)
 				{
-					if (mazeRow[i] == "o")
+					if (maze_row[i] == "o")
 					{
 						MazeNode temp_node(i, row_counter, true, "o");
 						_start_node = temp_node;
-						_solution_queue.push(_start_node);
-						_solution_stack.push(_start_node);
+                        _solution_queue.push(_start_node);
 						_maze_vector[row_counter][i] = temp_node;
 					}
 					else
 					{
-						MazeNode temp_node(i, row_counter, false, mazeRow[i]);
+						MazeNode temp_node(i, row_counter, false, maze_row[i]);
 						_maze_vector[row_counter][i] = temp_node;
 					}
 
@@ -103,7 +102,88 @@ void MazeSolver::solveMaze()
 
 void MazeSolver::breadthSearch()
 {
-	
+	while (!_solution_queue.empty())
+	{
+		MazeNode temp_node = _solution_queue.front();
+		_solution_queue.pop();
+
+		if (temp_node.getSpace() == "*")
+		{
+			return;
+		}
+
+		for (int i = 0; i < 4; i++)
+		{
+            MazeNode above_node = _maze_vector[temp_node.getY() + 1][temp_node.getX()];
+            MazeNode right_node = _maze_vector[temp_node.getY()][temp_node.getX() + 1];
+            MazeNode bottom_node = _maze_vector[temp_node.getY() - 1][temp_node.getX()];
+            MazeNode left_node = _maze_vector[temp_node.getY()][temp_node.getX() - 1];
+
+			switch(i)
+			{
+			case 0:
+
+				if (above_node.getSpace() == "." && !above_node.getVisited())
+				{
+					above_node.setVisited(true);
+					_maze_vector[above_node.getY()][above_node.getX()].setVisited(true);
+					_maze_vector[above_node.getY()][above_node.getX()].setSpace("X");
+					_solution_queue.push(above_node);
+				}
+				else
+				{
+					break;
+				}
+
+			case 1:
+
+				if (right_node.getSpace() == "." && !right_node.getVisited())
+				{
+					right_node.setVisited(true);
+					_maze_vector[right_node.getY()][right_node.getX() + 1].setVisited(true);
+					_maze_vector[right_node.getY()][right_node.getX() + 1].setSpace("X");
+					_solution_queue.push(right_node);
+				}
+				else
+				{
+					break;
+				}
+
+			case 2:
+
+				if (bottom_node.getSpace() == "." && !bottom_node.getVisited())
+				{
+					bottom_node.setVisited(true);
+					_maze_vector[bottom_node.getY() - 1][bottom_node.getX()].setVisited(true);
+					_maze_vector[bottom_node.getY() - 1][bottom_node.getX()].setSpace("X");
+					_solution_queue.push(bottom_node);
+				}
+				else
+				{
+					break;
+				}
+
+			case 3:
+
+				if (left_node.getSpace() == "." && !left_node.getVisited())
+				{
+					left_node.setVisited(true);
+					_maze_vector[left_node.getY()][left_node.getX() - 1].setVisited(true);
+					_maze_vector[left_node.getY()][left_node.getX() - 1].setSpace("X");
+					_solution_queue.push(left_node);
+				}
+				else
+				{
+					break;
+				}
+			}
+
+			if (_solution_queue.empty())
+			{
+				return;
+			}
+		}
+	}
 }
 
 void MazeSolver::depthSearch()
