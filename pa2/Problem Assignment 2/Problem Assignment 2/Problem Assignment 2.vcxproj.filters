@@ -37,9 +37,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="maze1.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
     <Text Include="maze2.txt">
       <Filter>Resource Files</Filter>
     </Text>
@@ -47,6 +44,9 @@
       <Filter>Resource Files</Filter>
     </Text>
     <Text Include="maze4.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="maze1.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>
