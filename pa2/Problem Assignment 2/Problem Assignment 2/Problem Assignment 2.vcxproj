@@ -119,9 +119,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MazeNode.cpp" />
     <ClCompile Include="MazeSolver.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="MazeNode.h" />
     <ClInclude Include="MazeSolver.h" />
     <ClInclude Include="StringSplitter.h" />
   </ItemGroup>

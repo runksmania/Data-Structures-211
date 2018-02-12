@@ -21,12 +21,18 @@
     <ClCompile Include="MazeSolver.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MazeNode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StringSplitter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MazeSolver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MazeNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

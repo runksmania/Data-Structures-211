@@ -2,6 +2,7 @@
 #include <fstream>
 #include "MazeSolver.h"
 #include "StringSplitter.h"
+#include "MazeNode.h"
 
 using namespace std;
 
@@ -95,54 +96,7 @@ void MazeSolver::solveMaze()
 
 void MazeSolver::breadthSearch()
 {
-	bool maze_unsolved = true;
-	int direction = 0;
-	int test_count = 0;
-	int current_x = _start_location_x;
-	int current_y = _start_location_y;
-	string current_space = _maze_vector[current_y][current_x];
-
-	while (maze_unsolved)
-	{
-		switch(direction){
-
-		case 0:
-			if (current_space == "." || current_space == "o")
-			{
-
-			}
-			direction++;
-			test_count++;
-			break;
-
-		case 1:
-			cout << "case: 1" << endl;
-			direction++;
-			test_count++;
-			break;
-
-		case 2:
-			cout << "case: 2" << endl;
-			direction++;
-			test_count++;
-			break;
-
-		case 3:
-			cout << "case: 3" << endl;
-			direction++;
-			test_count++;
-			break;
-		}
-		
-		direction %= 4;
-
-		if (test_count == 8)
-		{
-			maze_unsolved = false;
-		}
-	}
 	
-
 }
 
 void MazeSolver::depthSearch()

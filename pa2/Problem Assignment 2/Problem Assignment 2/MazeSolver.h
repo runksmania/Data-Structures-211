@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include <stack>
+#include <queue>
 
 using namespace std;
 
@@ -18,6 +19,7 @@ private:
 	string _file_to_open;
 	vector<vector<string>> _maze_vector;
 	stack<string> _solution_stack;
+	queue<string> _solution_queue;
 
 public:
 	MazeSolver();
