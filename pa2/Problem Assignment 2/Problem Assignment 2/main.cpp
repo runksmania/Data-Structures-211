@@ -10,6 +10,8 @@ int main(void)
 {
 	MazeSolver mazeSolver;
 	mazeSolver.printMaze();
+    mazeSolver.solveMaze();
+    mazeSolver.printMaze();
 
 	return 0;
 }
