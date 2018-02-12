@@ -3,7 +3,6 @@
 #include <string>
 #include <vector>
 #include "MazeSolver.h"
-#include "MazeNode.h"
 
 using namespace std;
 

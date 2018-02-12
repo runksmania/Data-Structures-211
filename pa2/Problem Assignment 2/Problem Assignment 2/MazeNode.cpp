@@ -1,6 +1,13 @@
 #include "MazeNode.h"
 
 
+MazeNode::MazeNode()
+{
+	_x = 0;
+	_y = 0;
+	_visited = false;
+	_space = "#";
+}
 
 MazeNode::MazeNode(int x = 0, int y = 0, bool visited = false, string space = "#")
 {

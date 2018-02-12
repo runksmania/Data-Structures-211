@@ -15,6 +15,7 @@ private:
 	string _space;
 
 public:
+	MazeNode();
 	MazeNode(int x, int y, bool visited, string space);
 	~MazeNode();
 	void setX(int x);

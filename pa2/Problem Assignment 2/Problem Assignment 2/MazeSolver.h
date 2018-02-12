@@ -6,6 +6,7 @@
 #include <vector>
 #include <stack>
 #include <queue>
+#include "MazeNode.h"
 
 using namespace std;
 
@@ -14,12 +15,10 @@ class MazeSolver
 private:
 	int _height;
 	int _width;
-	int _start_location_x;
-	int _start_location_y;
-	string _file_to_open;
-	vector<vector<string>> _maze_vector;
-	stack<string> _solution_stack;
-	queue<string> _solution_queue;
+	MazeNode _start_node;
+	vector<vector<MazeNode>> _maze_vector;
+	stack<MazeNode> _solution_stack;
+	queue<MazeNode> _solution_queue;
 
 public:
 	MazeSolver();
@@ -29,6 +28,7 @@ public:
 	void breadthSearch();
 	void depthSearch();
 	bool isOpenSpace(string spot_to_check);
+	MazeNode getStartNode();
 };
 
 #endif // !MAZE_SOLVER_H

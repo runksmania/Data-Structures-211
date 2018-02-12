@@ -2,19 +2,18 @@
 #include <fstream>
 #include "MazeSolver.h"
 #include "StringSplitter.h"
-#include "MazeNode.h"
 
 using namespace std;
 
 MazeSolver::MazeSolver()
 {
 	//Grab file from user.
-	_file_to_open = "";
+	string file_to_open = "";
 	cout << "Enter input file: ";
-	getline(cin, _file_to_open);
+	getline(cin, file_to_open);
 
 	//Open file.
-	ifstream input_file{ _file_to_open };
+	ifstream input_file{ file_to_open };
 
 	if (input_file.is_open())
 	{
@@ -47,10 +46,18 @@ MazeSolver::MazeSolver()
 				{
 					if (mazeRow[i] == "o")
 					{
-						_start_location_x = i;
-						_start_location_y = row_counter;
+						MazeNode temp_node(i, row_counter, true, "o");
+						_start_node = temp_node;
+						_solution_queue.push(_start_node);
+						_solution_stack.push(_start_node);
+						_maze_vector[row_counter][i] = temp_node;
 					}
-					_maze_vector[row_counter][i] = mazeRow[i];
+					else
+					{
+						MazeNode temp_node(i, row_counter, false, mazeRow[i]);
+						_maze_vector[row_counter][i] = temp_node;
+					}
+
 				}
 				row_counter++;
 			}
@@ -72,7 +79,7 @@ void MazeSolver::printMaze()
 	{
 		for (int j = 0; j < _width; j++)
 		{
-			cout << _maze_vector[i][j];
+			cout << _maze_vector[i][j].getSpace();
 		}
 		cout << endl;
 	}
@@ -119,4 +126,9 @@ bool MazeSolver::isOpenSpace(string spot_to_check)
 
 	return is_open_space;
 	
+}
+
+MazeNode MazeSolver::getStartNode()
+{
+	return _start_node;
 }
