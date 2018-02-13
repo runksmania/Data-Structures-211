@@ -104,6 +104,8 @@ void MazeSolver::breadthSearch()
 {
 	while (!_solution_queue.empty())
 	{
+        this->printMaze();
+        cout << endl;
 		MazeNode temp_node = _solution_queue.front();
 		_solution_queue.pop();
 
@@ -114,10 +116,20 @@ void MazeSolver::breadthSearch()
 
 		for (int i = 0; i < 4; i++)
 		{
-            MazeNode above_node = _maze_vector[temp_node.getY() + 1][temp_node.getX()];
+            MazeNode above_node = _maze_vector[temp_node.getY() - 1][temp_node.getX()];
             MazeNode right_node = _maze_vector[temp_node.getY()][temp_node.getX() + 1];
-            MazeNode bottom_node = _maze_vector[temp_node.getY() - 1][temp_node.getX()];
+            MazeNode bottom_node = _maze_vector[temp_node.getY() + 1][temp_node.getX()];
             MazeNode left_node = _maze_vector[temp_node.getY()][temp_node.getX() - 1];
+
+            //cout << above_node.getX() << " " << above_node.getY() << " " << above_node.getSpace() << " " << above_node.getVisited() << endl;
+            //cout << right_node.getX() << " " << right_node.getY() << " " << right_node.getSpace() << " " << right_node.getVisited() << endl;
+            //cout << bottom_node.getX() << " " << bottom_node.getY() << " " << bottom_node.getSpace() << " " << bottom_node.getVisited() << endl;
+            //cout << left_node.getX() << " " << left_node.getY() << " " << left_node.getSpace() << " " << left_node.getVisited() << endl;
+
+            if (above_node.getSpace() == "*" || right_node.getSpace() == "*" || bottom_node.getSpace() == "*" || left_node.getSpace() == "*")
+            {
+                return;
+            }
 
 			switch(i)
 			{
@@ -140,8 +152,8 @@ void MazeSolver::breadthSearch()
 				if (right_node.getSpace() == "." && !right_node.getVisited())
 				{
 					right_node.setVisited(true);
-					_maze_vector[right_node.getY()][right_node.getX() + 1].setVisited(true);
-					_maze_vector[right_node.getY()][right_node.getX() + 1].setSpace("X");
+					_maze_vector[right_node.getY()][right_node.getX()].setVisited(true);
+					_maze_vector[right_node.getY()][right_node.getX()].setSpace("X");
 					_solution_queue.push(right_node);
 				}
 				else
@@ -154,8 +166,8 @@ void MazeSolver::breadthSearch()
 				if (bottom_node.getSpace() == "." && !bottom_node.getVisited())
 				{
 					bottom_node.setVisited(true);
-					_maze_vector[bottom_node.getY() - 1][bottom_node.getX()].setVisited(true);
-					_maze_vector[bottom_node.getY() - 1][bottom_node.getX()].setSpace("X");
+					_maze_vector[bottom_node.getY()][bottom_node.getX()].setVisited(true);
+					_maze_vector[bottom_node.getY()][bottom_node.getX()].setSpace("X");
 					_solution_queue.push(bottom_node);
 				}
 				else
@@ -168,19 +180,14 @@ void MazeSolver::breadthSearch()
 				if (left_node.getSpace() == "." && !left_node.getVisited())
 				{
 					left_node.setVisited(true);
-					_maze_vector[left_node.getY()][left_node.getX() - 1].setVisited(true);
-					_maze_vector[left_node.getY()][left_node.getX() - 1].setSpace("X");
+					_maze_vector[left_node.getY()][left_node.getX()].setVisited(true);
+					_maze_vector[left_node.getY()][left_node.getX()].setSpace("X");
 					_solution_queue.push(left_node);
 				}
 				else
 				{
 					break;
 				}
-			}
-
-			if (_solution_queue.empty())
-			{
-				return;
 			}
 		}
 	}
