@@ -27,7 +27,6 @@ public:
 	void solveMaze();
 	void breadthSearch();
 	void depthSearch();
-	bool isOpenSpace(string spot_to_check);
 	MazeNode getStartNode();
 };
 

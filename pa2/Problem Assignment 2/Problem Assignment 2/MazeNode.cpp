@@ -6,10 +6,10 @@ MazeNode::MazeNode()
 	_x = 0;
 	_y = 0;
 	_visited = false;
-	_space = "#";
+    _space = '#';
 }
 
-MazeNode::MazeNode(int x = 0, int y = 0, bool visited = false, string space = "#")
+MazeNode::MazeNode(int x = 0, int y = 0, bool visited = false, char space = '#')
 {
 	_x = x;
 	_y = y;
@@ -52,12 +52,12 @@ bool MazeNode::getVisited()
 	return _visited;
 }
 
-void MazeNode::setSpace(string space)
+void MazeNode::setSpace(char space)
 {
 	_space = space;
 }
 
-string MazeNode::getSpace()
+char MazeNode::getSpace()
 {
 	return _space;
 }
