@@ -12,11 +12,11 @@ private:
 	int _x;
 	int _y;
 	bool _visited;
-	string _space;
+	char _space;
 
 public:
 	MazeNode();
-	MazeNode(int x, int y, bool visited, string space);
+	MazeNode(int x, int y, bool visited, char space);
 	~MazeNode();
 	void setX(int x);
 	int getX();
@@ -24,8 +24,8 @@ public:
 	int getY();
 	void setVisited(bool visited);
 	bool getVisited();
-	void setSpace(string space);
-	string getSpace();
+	void setSpace(char space);
+	char getSpace();
 };
 
 #endif MAZE_NODE_H

@@ -2,6 +2,7 @@
 #include <fstream>
 #include "MazeSolver.h"
 #include "StringSplitter.h"
+#include <string>
 
 using namespace std;
 
@@ -40,20 +41,19 @@ MazeSolver::MazeSolver()
 			{
 				getline(input_file, current_line);
 				//cout << current_line << endl;
-				vector<string> maze_row = StringSplitter::split(current_line, " ");
 
 				for (int i = 0; i < _width; i++)
 				{
-					if (maze_row[i] == "o")
+					if (current_line[i] == 'o')
 					{
-						MazeNode temp_node(i, row_counter, true, "o");
+						MazeNode temp_node(i, row_counter, true, 'o');
 						_start_node = temp_node;
                         _solution_queue.push(_start_node);
 						_maze_vector[row_counter][i] = temp_node;
 					}
 					else
 					{
-						MazeNode temp_node(i, row_counter, false, maze_row[i]);
+						MazeNode temp_node(i, row_counter, false, current_line[i]);
 						_maze_vector[row_counter][i] = temp_node;
 					}
 
@@ -104,29 +104,23 @@ void MazeSolver::breadthSearch()
 {
 	while (!_solution_queue.empty())
 	{
-        this->printMaze();
-        cout << endl;
 		MazeNode temp_node = _solution_queue.front();
 		_solution_queue.pop();
 
-		if (temp_node.getSpace() == "*")
+		if (temp_node.getSpace() == '*')
 		{
 			return;
 		}
 
 		for (int i = 0; i < 4; i++)
 		{
+            
             MazeNode above_node = _maze_vector[temp_node.getY() - 1][temp_node.getX()];
             MazeNode right_node = _maze_vector[temp_node.getY()][temp_node.getX() + 1];
             MazeNode bottom_node = _maze_vector[temp_node.getY() + 1][temp_node.getX()];
             MazeNode left_node = _maze_vector[temp_node.getY()][temp_node.getX() - 1];
 
-            //cout << above_node.getX() << " " << above_node.getY() << " " << above_node.getSpace() << " " << above_node.getVisited() << endl;
-            //cout << right_node.getX() << " " << right_node.getY() << " " << right_node.getSpace() << " " << right_node.getVisited() << endl;
-            //cout << bottom_node.getX() << " " << bottom_node.getY() << " " << bottom_node.getSpace() << " " << bottom_node.getVisited() << endl;
-            //cout << left_node.getX() << " " << left_node.getY() << " " << left_node.getSpace() << " " << left_node.getVisited() << endl;
-
-            if (above_node.getSpace() == "*" || right_node.getSpace() == "*" || bottom_node.getSpace() == "*" || left_node.getSpace() == "*")
+            if (above_node.getSpace() == '*' || right_node.getSpace() == '*' || bottom_node.getSpace() == '*' || left_node.getSpace() == '*')
             {
                 return;
             }
@@ -135,12 +129,12 @@ void MazeSolver::breadthSearch()
 			{
 			case 0:
 
-				if (above_node.getSpace() == "." && !above_node.getVisited())
+				if (above_node.getSpace() == '.' && !above_node.getVisited())
 				{
 					above_node.setVisited(true);
 					_maze_vector[above_node.getY()][above_node.getX()].setVisited(true);
-					_maze_vector[above_node.getY()][above_node.getX()].setSpace("X");
-					_solution_queue.push(above_node);
+                    _maze_vector[above_node.getY()][above_node.getX()].setSpace('X');
+					_solution_queue.push(above_node);               
 				}
 				else
 				{
@@ -149,11 +143,11 @@ void MazeSolver::breadthSearch()
 
 			case 1:
 
-				if (right_node.getSpace() == "." && !right_node.getVisited())
+				if (right_node.getSpace() == '.' && !right_node.getVisited())
 				{
 					right_node.setVisited(true);
 					_maze_vector[right_node.getY()][right_node.getX()].setVisited(true);
-					_maze_vector[right_node.getY()][right_node.getX()].setSpace("X");
+                    _maze_vector[right_node.getY()][right_node.getX()].setSpace('X');
 					_solution_queue.push(right_node);
 				}
 				else
@@ -163,11 +157,11 @@ void MazeSolver::breadthSearch()
 
 			case 2:
 
-				if (bottom_node.getSpace() == "." && !bottom_node.getVisited())
+				if (bottom_node.getSpace() == '.' && !bottom_node.getVisited())
 				{
 					bottom_node.setVisited(true);
 					_maze_vector[bottom_node.getY()][bottom_node.getX()].setVisited(true);
-					_maze_vector[bottom_node.getY()][bottom_node.getX()].setSpace("X");
+                    _maze_vector[bottom_node.getY()][bottom_node.getX()].setSpace('X');
 					_solution_queue.push(bottom_node);
 				}
 				else
@@ -177,11 +171,11 @@ void MazeSolver::breadthSearch()
 
 			case 3:
 
-				if (left_node.getSpace() == "." && !left_node.getVisited())
+				if (left_node.getSpace() == '.' && !left_node.getVisited())
 				{
 					left_node.setVisited(true);
 					_maze_vector[left_node.getY()][left_node.getX()].setVisited(true);
-					_maze_vector[left_node.getY()][left_node.getX()].setSpace("X");
+                    _maze_vector[left_node.getY()][left_node.getX()].setSpace('X');
 					_solution_queue.push(left_node);
 				}
 				else
@@ -196,23 +190,6 @@ void MazeSolver::breadthSearch()
 void MazeSolver::depthSearch()
 {
 
-}
-
-bool MazeSolver::isOpenSpace(string spot_to_check)
-{
-	bool is_open_space = false;
-	
-	if (spot_to_check == ".")
-	{
-		is_open_space = true;
-	}
-	else
-	{
-		is_open_space = false;
-	}
-
-	return is_open_space;
-	
 }
 
 MazeNode MazeSolver::getStartNode()
