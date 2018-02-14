@@ -35,6 +35,9 @@
     <ClInclude Include="MazeNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SpaceReplacer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="maze1.txt">
@@ -47,6 +50,12 @@
       <Filter>Resource Files</Filter>
     </Text>
     <Text Include="maze4.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="maze6.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="maze5.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>
