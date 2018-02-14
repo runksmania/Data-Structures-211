@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include "MazeSolver.h"
+#include "SpaceReplacer.h"
 
 using namespace std;
 
