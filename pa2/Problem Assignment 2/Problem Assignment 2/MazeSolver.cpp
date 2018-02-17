@@ -48,8 +48,6 @@ MazeSolver::MazeSolver()
                     {
                         MazeNode temp_node(i, row_counter, true, 'o');
                         _start_node = temp_node;
-                        _solution_queue.push(_start_node);
-                        _solution_stack.push(_start_node);
                         _maze_vector[row_counter][i] = temp_node;
                     }
                     else
@@ -61,7 +59,8 @@ MazeSolver::MazeSolver()
                 }
                 row_counter++;
             }
-
+            _bfs_solution = _maze_vector;
+            _dfs_solution = _maze_vector;
         }
     }
 
@@ -75,36 +74,107 @@ MazeSolver::~MazeSolver()
 
 void MazeSolver::printMaze()
 {
-    cout << "  0123456" << endl;
+    if (_maze_solved == false)
+    {
+        for (int i = 0; i < _height; i++)
+        {
+            for (int j = 0; j < _width; j++)
+            {
+                cout << _maze_vector[i][j].getSpace();
+            }
+            cout << endl;
+        }
+        cout << endl;
+        return;
+    }
+
+    //Breadth Search print
+    cout << "Breadth solution:\n";
     for (int i = 0; i < _height; i++)
     {
-        cout << i << " ";
         for (int j = 0; j < _width; j++)
         {
-            cout << _maze_vector[i][j].getSpace();
+            cout << _bfs_solution[i][j].getSpace();
         }
         cout << endl;
     }
+    cout << endl;
+
+    //Depth Search print
+    cout << "Depth solution:\n";
+    for (int i = 0; i < _height; i++)
+    {
+        for (int j = 0; j < _width; j++)
+        {
+            cout << _dfs_solution[i][j].getSpace();
+        }
+        cout << endl;
+    }
+    cout << endl;
+}
+
+void MazeSolver::printMazeToFile()
+{
+    ofstream bfs_file{ "solution_bfs.txt" };
+    ofstream dfs_file{ "solution_dfs.txt" };
+
+    if (!_maze_solved)
+    {
+        bfs_file << "There is no solution to this maze.";
+        dfs_file << "There is no solution to this maze.";
+        bfs_file.close();
+        dfs_file.close();
+        return;
+    }
+
+    for (int i = 0; i < _height; i++)
+    {
+        for (int j = 0; j < _width; j++)
+        {
+            bfs_file << _bfs_solution[i][j].getSpace();
+        }
+        bfs_file << endl;
+    }
+
+    for (int i = 0; i < _height; i++)
+    {
+        for (int j = 0; j < _width; j++)
+        {
+            dfs_file << _dfs_solution[i][j].getSpace();
+        }
+        dfs_file << endl;
+    }
+    bfs_file.close();
+    dfs_file.close();
 }
 
 void MazeSolver::solveMaze()
 {
-    string search_decision = "";
-    cout << "How would you like to solve the maze?\n Enter 1 for Breadth First Search. Enter 2 for Depth First Search.\n How do you want to solve: ";
-    getline(cin, search_decision);
+    //clear out solution queue;
+    while (_solution_queue.empty() == false)
+    {
+        _solution_queue.pop();
+    }
 
-    if (search_decision == "1")
+    _bfs_solution = _maze_vector;
+    breadthSearch();
+
+    //clear out solution stack;
+    while (_solution_stack.empty() == false)
     {
-        breadthSearch();
+        _solution_stack.pop();
     }
-    else
-    {
-        depthSearch();
-    }
+
+    _dfs_solution = _maze_vector;
+    depthSearch();
+
 }
 
 void MazeSolver::breadthSearch()
 {
+    _solution_queue.push(_start_node);
+    _maze_solved = false;
+
     while (!_solution_queue.empty())
     {
         MazeNode temp_node = _solution_queue.front();
@@ -118,13 +188,14 @@ void MazeSolver::breadthSearch()
         for (int i = 0; i < 4; i++)
         {
 
-            MazeNode above_node = _maze_vector[temp_node.getY() - 1][temp_node.getX()];
-            MazeNode right_node = _maze_vector[temp_node.getY()][temp_node.getX() + 1];
-            MazeNode bottom_node = _maze_vector[temp_node.getY() + 1][temp_node.getX()];
-            MazeNode left_node = _maze_vector[temp_node.getY()][temp_node.getX() - 1];
+            MazeNode above_node = _bfs_solution[temp_node.getY() - 1][temp_node.getX()];
+            MazeNode right_node = _bfs_solution[temp_node.getY()][temp_node.getX() + 1];
+            MazeNode bottom_node = _bfs_solution[temp_node.getY() + 1][temp_node.getX()];
+            MazeNode left_node = _bfs_solution[temp_node.getY()][temp_node.getX() - 1];
 
             if (above_node.getSpace() == '*' || right_node.getSpace() == '*' || bottom_node.getSpace() == '*' || left_node.getSpace() == '*')
             {
+                _maze_solved = true;
                 return;
             }
 
@@ -133,9 +204,9 @@ void MazeSolver::breadthSearch()
             case 0:
 
                 if (above_node.getSpace() == '.' && !above_node.getVisited())
-                {   
-                    _maze_vector[above_node.getY()][above_node.getX()].setVisited(true);
-                    _maze_vector[above_node.getY()][above_node.getX()].setSpace('X');
+                {
+                    _bfs_solution[above_node.getY()][above_node.getX()].setVisited(true);
+                    _bfs_solution[above_node.getY()][above_node.getX()].setSpace('X');
                     _solution_queue.push(above_node);
                 }
                 else
@@ -147,8 +218,8 @@ void MazeSolver::breadthSearch()
 
                 if (right_node.getSpace() == '.' && !right_node.getVisited())
                 {
-                    _maze_vector[right_node.getY()][right_node.getX()].setVisited(true);
-                    _maze_vector[right_node.getY()][right_node.getX()].setSpace('X');
+                    _bfs_solution[right_node.getY()][right_node.getX()].setVisited(true);
+                    _bfs_solution[right_node.getY()][right_node.getX()].setSpace('X');
                     _solution_queue.push(right_node);
                 }
                 else
@@ -160,8 +231,8 @@ void MazeSolver::breadthSearch()
 
                 if (bottom_node.getSpace() == '.' && !bottom_node.getVisited())
                 {
-                    _maze_vector[bottom_node.getY()][bottom_node.getX()].setVisited(true);
-                    _maze_vector[bottom_node.getY()][bottom_node.getX()].setSpace('X');
+                    _bfs_solution[bottom_node.getY()][bottom_node.getX()].setVisited(true);
+                    _bfs_solution[bottom_node.getY()][bottom_node.getX()].setSpace('X');
                     _solution_queue.push(bottom_node);
                 }
                 else
@@ -173,8 +244,8 @@ void MazeSolver::breadthSearch()
 
                 if (left_node.getSpace() == '.' && !left_node.getVisited())
                 {
-                    _maze_vector[left_node.getY()][left_node.getX()].setVisited(true);
-                    _maze_vector[left_node.getY()][left_node.getX()].setSpace('X');
+                    _bfs_solution[left_node.getY()][left_node.getX()].setVisited(true);
+                    _bfs_solution[left_node.getY()][left_node.getX()].setSpace('X');
                     _solution_queue.push(left_node);
                 }
                 else
@@ -188,101 +259,97 @@ void MazeSolver::breadthSearch()
 
 void MazeSolver::depthSearch()
 {
-    while (!_solution_queue.empty())
+    _solution_stack.push(_start_node);
+    _maze_solved = false;
+
+    while (!_solution_stack.empty())
     {
         MazeNode temp_node = _solution_stack.top();
         _solution_stack.pop();
 
-        if (temp_node.getSpace() == '*')
+        MazeNode above_node = _dfs_solution[temp_node.getY() - 1][temp_node.getX()];
+        MazeNode right_node = _dfs_solution[temp_node.getY()][temp_node.getX() + 1];
+        MazeNode bottom_node = _dfs_solution[temp_node.getY() + 1][temp_node.getX()];
+        MazeNode left_node = _dfs_solution[temp_node.getY()][temp_node.getX() - 1];
+
+        if (temp_node.getSpace() == '*' || above_node.getSpace() == '*' || right_node.getSpace() == '*' || bottom_node.getSpace() == '*' || left_node.getSpace() == '*')
         {
+            _maze_solved = true;
             return;
         }
 
-        MazeNode above_node = _maze_vector[temp_node.getY() - 1][temp_node.getX()];
-        MazeNode right_node = _maze_vector[temp_node.getY()][temp_node.getX() + 1];
-        MazeNode bottom_node = _maze_vector[temp_node.getY() + 1][temp_node.getX()];
-        MazeNode left_node = _maze_vector[temp_node.getY()][temp_node.getX() - 1];
-
-        for (int i = 0; i < 4; i++)
+        if (above_node.getSpace() == '.' && !above_node.getVisited())
         {
-            //this->printMaze();
-            //cout << endl;
+            // hasn't checked all possible locations to go from that node
+            _solution_stack.push(temp_node);
 
-            switch (i)
+            while (above_node.getSpace() == '.' && !above_node.getVisited())
             {
-            case 0:
+                _dfs_solution[above_node.getY()][above_node.getX()].setVisited(true);
+                _dfs_solution[above_node.getY()][above_node.getX()].setSpace('X');
+                _solution_stack.push(above_node);
+                above_node = _dfs_solution[above_node.getY() - 1][above_node.getX()];
+            }
 
-                while (above_node.getSpace() == '.' && !above_node.getVisited())
-                {
-                    cout << "Checking node: (" << above_node.getX() << ", " << above_node.getY() << ")" << endl;
-                    _maze_vector[above_node.getY()][above_node.getX()].setVisited(true);
-                    _maze_vector[above_node.getY()][above_node.getX()].setSpace('X');
-                    _solution_stack.push(above_node);
-                    above_node = _maze_vector[above_node.getY() - 1][above_node.getX()];
-                }
+            if (above_node.getSpace() == '*')
+            {
+                _maze_solved = true;
+                return;
+            }
+        }
+        else if (right_node.getSpace() == '.' && !right_node.getVisited())
+        {
+            // hasn't checked all possible locations to go from that node
+            _solution_stack.push(temp_node);
 
-                if (above_node.getSpace() == '*')
-                {
-                    return;
-                }
+            while (right_node.getSpace() == '.' && !right_node.getVisited())
+            {
+                _dfs_solution[right_node.getY()][right_node.getX()].setVisited(true);
+                _dfs_solution[right_node.getY()][right_node.getX()].setSpace('X');
+                _solution_stack.push(right_node);
+                right_node = _dfs_solution[right_node.getY()][right_node.getX() + 1];
+            }
 
-                break;
+            if (right_node.getSpace() == '*')
+            {
+                _maze_solved = true;
+                return;
+            }
+        }
+        else if (bottom_node.getSpace() == '.' && !bottom_node.getVisited())
+        {
+            // hasn't checked all possible locations to go from that node
+            _solution_stack.push(temp_node);
 
-            case 1:
+            while (bottom_node.getSpace() == '.' && !bottom_node.getVisited())
+            {
+                _dfs_solution[bottom_node.getY()][bottom_node.getX()].setVisited(true);
+                _dfs_solution[bottom_node.getY()][bottom_node.getX()].setSpace('X');
+                _solution_stack.push(bottom_node);
+                bottom_node = _dfs_solution[bottom_node.getY() + 1][bottom_node.getX()];
+            }
 
-                while (right_node.getSpace() == '.' && !right_node.getVisited())
-                {
-                    cout << "Checking node: (" << right_node.getX() << ", " << right_node.getY() << ")" << endl;
-                    _maze_vector[right_node.getY()][right_node.getX()].setVisited(true);
-                    _maze_vector[right_node.getY()][right_node.getX()].setSpace('X');
-                    _solution_stack.push(right_node);
-                    right_node = _maze_vector[right_node.getY()][right_node.getX() + 1];
-                }
+            if (bottom_node.getSpace() == '*')
+            {
+                _maze_solved = true;
+                return;
+            }
+        }
+        else if (left_node.getSpace() == '.' && !left_node.getVisited())
+        {
 
-                if (right_node.getSpace() == '*')
-                {
-                    return;
-                }
+            while (left_node.getSpace() == '.' && !left_node.getVisited())
+            {
+                _dfs_solution[left_node.getY()][left_node.getX()].setVisited(true);
+                _dfs_solution[left_node.getY()][left_node.getX()].setSpace('X');
+                _solution_stack.push(left_node);
+                left_node = _dfs_solution[left_node.getY()][left_node.getX() - 1];
+            }
 
-                break;
-
-            case 2:
-
-                while (bottom_node.getSpace() == '.' && !bottom_node.getVisited())
-                {
-                    cout << "Checking node: (" << bottom_node.getX() << ", " << bottom_node.getY() << ")" << endl;
-                    _maze_vector[bottom_node.getY()][bottom_node.getX()].setVisited(true);
-                    _maze_vector[bottom_node.getY()][bottom_node.getX()].setSpace('X');
-                    _solution_stack.push(bottom_node);
-                    bottom_node = _maze_vector[bottom_node.getY() + 1][bottom_node.getX()];
-                }
-
-                if (bottom_node.getSpace() == '*')
-                {
-                    return;
-                }
-
-                break;
-
-
-            case 3:
-
-                while (left_node.getSpace() == '.' && !left_node.getVisited())
-                {
-                    cout << "Checking node: (" << left_node.getX() << ", " << left_node.getY() << ")" << endl;
-                    _maze_vector[left_node.getY()][left_node.getX()].setVisited(true);
-                    _maze_vector[left_node.getY()][left_node.getX()].setSpace('X');
-                    _solution_stack.push(left_node);
-                    left_node = _maze_vector[left_node.getY()][left_node.getX() - 1];
-                }
-
-                if (left_node.getSpace() == '*')
-                {
-                    return;
-                }
-
-                break;
-
+            if (left_node.getSpace() == '*')
+            {
+                _maze_solved = true;
+                return;
             }
         }
     }
@@ -291,4 +358,9 @@ void MazeSolver::depthSearch()
 MazeNode MazeSolver::getStartNode()
 {
     return _start_node;
+}
+
+bool MazeSolver::isMazeSolved()
+{
+    return _maze_solved;
 }
