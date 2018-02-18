@@ -125,8 +125,6 @@
   <ItemGroup>
     <ClInclude Include="MazeNode.h" />
     <ClInclude Include="MazeSolver.h" />
-    <ClInclude Include="SpaceReplacer.h" />
-    <ClInclude Include="StringSplitter.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="maze1.txt" />
