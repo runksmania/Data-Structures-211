@@ -102,7 +102,6 @@ public:
 		}
         return children;
     }
-
 };
 
 #endif // !TRIE_NODE_H
