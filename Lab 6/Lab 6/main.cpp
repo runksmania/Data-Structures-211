@@ -68,7 +68,16 @@ bool isAvl(BinarySearchTree<int> *tree)
 
 BinaryNode<int>* rotateLeft(BinaryNode<int>* original_root)
 {
-    return original_root;
+    if (original_root == nullptr)
+    {
+        return original_root;
+    }
+
+    BinaryNode<int>* new_root = original_root->getRightChild();
+    original_root->setRightChild(new_root->getLeftChild());
+    new_root->setLeftChild(original_root);
+
+    return new_root;
 }
 
 bool isFullHelper(BinaryNode<int> *node)
@@ -200,6 +209,7 @@ int main(void)
     BinaryNode<int>* rotated = rotateLeft(tree.getRoot());
     RecursivePreOrderTraversal<int> traversal{};
     traversal.traverse(rotated);
+    cout << endl;
     
     //rotate again just for fun
     rotated = rotateLeft(rotated);
