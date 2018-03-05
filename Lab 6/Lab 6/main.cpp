@@ -71,9 +71,41 @@ BinaryNode<int>* rotateLeft(BinaryNode<int>* original_root)
     return original_root;
 }
 
+bool isFullHelper(BinaryNode<int> *node)
+{
+    if (node == nullptr)
+    {
+        return true;
+    }
+    else if (node->isLeaf())
+    {
+        return true;
+    }
+
+    BinaryNode<int> *left = node->getLeftChild();
+    BinaryNode<int> *right = node->getRightChild();
+
+    //If node is not a leaf node and has one nullptr child the tree is not full.
+    if (right == nullptr || left == nullptr)
+    {
+        return false;
+    }
+    else
+    {
+        return (isFullHelper(left) && isFullHelper(right));
+    }
+}
+
 bool isFull(BinarySearchTree<int> *tree)
 {
-    return false;
+    if (tree == nullptr)
+    {
+        return true;
+    }
+    else
+    {
+        return isFullHelper(tree->getRoot());
+    }
 }
 
 bool isComplete(BinarySearchTree<int>* tree)
@@ -121,7 +153,7 @@ int main(void)
     cout << boolalpha << "Is Full: " << isFull(&tree) << " (expected: TRUE)" << endl;
     cout << boolalpha << "Is Complete: " << isComplete(&tree) << " (expected: TRUE)" << endl;
     cout << boolalpha << "Is AVL: " << isAvl(&tree) << " (expected: TRUE)" << endl;
-    cout << boolalpha << "Height: " << getHeight(tree.getRoot()) << " (expected: -1)" << endl;
+    cout << boolalpha << "Height: " << getHeight(tree.getRoot()) << " (expected: -1)" << endl << endl;
 
     tree.addElement(10);
     tree.addElement(5);
@@ -129,14 +161,14 @@ int main(void)
     cout << boolalpha << "Is Full: " << isFull(&tree) << " (expected: FALSE)" << endl;
     cout << boolalpha << "Is Complete: " << isComplete(&tree) << " (expected: TRUE)" << endl;
     cout << boolalpha << "Is AVL: " << isAvl(&tree) << " (expected: TRUE)" << endl;
-    cout << boolalpha << "Height: " << getHeight(tree.getRoot()) << " (expected: 1)" << endl;
+    cout << boolalpha << "Height: " << getHeight(tree.getRoot()) << " (expected: 1)" << endl << endl;
 
     tree.addElement(15);
 
     cout << boolalpha << "Is Full: " << isFull(&tree) << " (expected: TRUE)" << endl;
     cout << boolalpha << "Is Complete: " << isComplete(&tree) << " (expected: TRUE)" << endl;
     cout << boolalpha << "Is AVL: " << isAvl(&tree) << " (expected: TRUE)" << endl;
-    cout << boolalpha << "Height: " << getHeight(tree.getRoot()) << " (expected: 1)" << endl;
+    cout << boolalpha << "Height: " << getHeight(tree.getRoot()) << " (expected: 1)" << endl << endl;
 
     tree.addElement(12);
     tree.addElement(20);
@@ -144,24 +176,24 @@ int main(void)
     cout << boolalpha << "Is Full: " << isFull(&tree) << " (expected: TRUE)" << endl;
     cout << boolalpha << "Is Complete: " << isComplete(&tree) << " (expected: FALSE)" << endl;
     cout << boolalpha << "Is AVL: " << isAvl(&tree) << " (expected: TRUE)" << endl;
-    cout << boolalpha << "Height: " << getHeight(tree.getRoot()) << " (expected: 2)" << endl;
+    cout << boolalpha << "Height: " << getHeight(tree.getRoot()) << " (expected: 2)" << endl << endl;
 
     tree.addElement(11);
     tree.addElement(3);
 
     cout << boolalpha << "Is Full: " << isFull(&tree) << " (expected: FALSE)" << endl;
     cout << boolalpha << "Is Complete: " << isComplete(&tree) << " (expected: FALSE)" << endl;
-    cout << boolalpha << "Is AVL: " << isAvl(&tree) << " (expected: FALSE)" << endl;
-    cout << boolalpha << "Height: " << getHeight(tree.getRoot()) << " (expected: 3)" << endl;
+    cout << boolalpha << "Is AVL: " << isAvl(&tree) << " (expected: TRUE)" << endl;
+    cout << boolalpha << "Height: " << getHeight(tree.getRoot()) << " (expected: 3)" << endl << endl;
 
     tree.addElement(13);
     tree.addElement(1);
     tree.addElement(7);
 
-    cout << boolalpha << "Is Full: " << isFull(&tree) << " (expected: TRUE)" << endl;
+    cout << boolalpha << "Is Full: " << isFull(&tree) << " (expected: FALSE)" << endl;
     cout << boolalpha << "Is Complete: " << isComplete(&tree) << " (expected: FALSE)" << endl;
     cout << boolalpha << "Is AVL: " << isAvl(&tree) << " (expected: TRUE)" << endl;
-    cout << boolalpha << "Height: " << getHeight(tree.getRoot()) << " (expected: 3)" << endl;
+    cout << boolalpha << "Height: " << getHeight(tree.getRoot()) << " (expected: 3)" << endl << endl;
 
 
     //Note: this breaks the tree structure because our BST isn't informed of the new root.  Must be done last
