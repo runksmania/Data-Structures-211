@@ -1,3 +1,13 @@
+/*
+Assignment: PA
+Description: Learn how to build a Trie and use it to run an auto complete search.
+Author: Michael Cottrell
+HSU ID: 946839472
+Completion Time: 6 hours.
+In completing this program, I received help from the following people:
+Adam Carter
+*/
+
 #ifndef TRIE_NODE_H
 #define TRIE_NODE_H
 

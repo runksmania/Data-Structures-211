@@ -1,0 +1,9 @@
+Does it walk on 4 legs?
+Is it a mammal?
+*fly?
+*centipede?
+Does it purr?
+Does it howl?
+*mouse?
+*dog?
+*cat?
