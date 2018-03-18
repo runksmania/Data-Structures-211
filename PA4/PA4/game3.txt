@@ -1,7 +1,7 @@
 Does it walk on 4 legs?
 Does it fly?
 Is it a mammal?
-Is it prehistoric?
+Is it a prehistoric creature?
 *centipede?
 *dinosaur
 *human
@@ -12,6 +12,10 @@ Does it purr?
 Does it howl?
 Is it bigger than a human?
 *mouse?
+Does it have a very long neck?
 *hippo
+*giraffe?
 *dog?
+Is it a domestic animal?
+*jaguar?
 *cat?

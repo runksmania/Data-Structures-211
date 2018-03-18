@@ -27,7 +27,7 @@ GuessingGame::~GuessingGame()
 
 void GuessingGame::beginGame()
 {
-    string user_retry = "N", save_file = "", user_save = "";
+    string user_retry = "N", save_file = "";
 
     do
     {
@@ -73,13 +73,27 @@ void GuessingGame::beginGame()
                     getline(cin, question);
                     cout << endl;
 
+                    if (question[question.size() - 1] != '?')
+                    {
+                        question += '?';
+                    }
+
                     cout << "Enter the answer to this question. (Y)es or (N)o: \n";
                     getline(cin, question_answer);
                     cout << endl;
 
-                    BinaryNode<string> *new_answer = new BinaryNode<string>{"Is it a " + correct_answer};
+                    BinaryNode<string> *new_answer = new BinaryNode<string>{"Is it a " + correct_answer + "?"};
                     BinaryNode<string> *new_question = new BinaryNode<string>{ question };
-                    previous->setLeftChild(new_question);
+                    
+                    if (previous->getLeftChild() == current)
+                    {
+                        previous->setLeftChild(new_question);
+                    }
+                    else
+                    {
+                        previous->setRightChild(new_question);
+                    }
+                    
 
                     if (question_answer == "Y" || question_answer == "y" || question_answer == "Yes" || question_answer == "yes")
                     {
@@ -107,9 +121,7 @@ void GuessingGame::beginGame()
 
     } while (user_retry == "Y" || user_retry == "y" || user_retry == "Yes" || user_retry == "yes");
 
-    cout << "Would you like to save the tree?\n Enter (Y)es or (N)o: ";
-    getline(cin, user_save);
-    cout << "\nEnter a filename: ";
+    cout << "Enter a save filename: ";
     getline(cin, save_file);
     cout << endl;
 
