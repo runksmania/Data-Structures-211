@@ -9,9 +9,7 @@ Is it an insect?
 *bird?
 *butterfly?
 Does it purr?
-Does it howl?
-Is it bigger than a human?
-*mouse?
-*hippo
-*dog?
+Is it a domestic animal?
+*jaguar
+*cat?
 *cat?

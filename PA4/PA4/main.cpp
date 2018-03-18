@@ -6,7 +6,7 @@ using namespace std;
 
 int main()
 {
-    GuessingGame *guessing_game = new GuessingGame("game1.txt", false);
+    GuessingGame *guessing_game = new GuessingGame("game3.txt", false);
 
     guessing_game->beginGame();
 

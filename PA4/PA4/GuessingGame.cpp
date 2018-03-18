@@ -77,18 +77,19 @@ void GuessingGame::beginGame()
                     getline(cin, question_answer);
                     cout << endl;
 
-                    BinaryNode<string> *temp = new BinaryNode<string>{ previous->getValue() };
-                    previous->setValue(question);
+                    BinaryNode<string> *new_answer = new BinaryNode<string>{"Is it a " + correct_answer};
+                    BinaryNode<string> *new_question = new BinaryNode<string>{ question };
+                    previous->setLeftChild(new_question);
 
                     if (question_answer == "Y" || question_answer == "y" || question_answer == "Yes" || question_answer == "yes")
                     {
-                        previous->setRightChild(current);
-                        previous->setLeftChild(temp);
+                        new_question->setRightChild(new_answer);
+                        new_question->setLeftChild(current);
                     }
                     else
                     {
-                        previous->setLeftChild(current);
-                        previous->setRightChild(temp);
+                        new_question->setRightChild(current);
+                        new_question->setLeftChild(new_answer);
                     }
 
                     cout << "Game Over.\nWould you like to play again?\n Enter (Y)es or (N)o: ";
