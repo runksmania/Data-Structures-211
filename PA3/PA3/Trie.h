@@ -1,3 +1,13 @@
+/*
+Assignment: PA
+Description: Learn how to build a Trie and use it to run an auto complete search.
+Author: Michael Cottrell
+HSU ID: 946839472
+Completion Time: 6 hours.
+In completing this program, I received help from the following people:
+Adam Carter
+*/
+
 #ifndef TRIE_H
 #define TRIE_H
 
@@ -69,15 +79,26 @@ public:
         vector<string> matches, matches_to_add;
         TrieNode *current = _root;
 
+        if (_root == nullptr)
+        {
+            return matches;
+        }
+
         for (auto character : word)
         {
             current = current->getChild(character);
+            
+            if (current == nullptr)
+            {
+                return matches;
+            }
         }
-
+        
         vector<TrieNode*> children = current->getChildren();
 
         if (current != nullptr || current->isWord())
         {
+
             if (current->isWord())
             {
                 matches.push_back(word);
@@ -110,7 +131,6 @@ public:
 
         if (root->isWord())
         {
-            //cout << new_word << endl;
             matches.push_back(new_word);
         }
 
@@ -152,11 +172,6 @@ public:
         {
             testRecursionWalker(child);
         }
-    }
-
-    TrieNode* getRoot()
-    {
-        return _root;
     }
 };
 
