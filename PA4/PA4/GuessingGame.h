@@ -11,10 +11,11 @@ class GuessingGame
 {
 private:
     BinaryGuessTree *_game_tree;
+    string _game_file;
 
 public:
     GuessingGame();
-    GuessingGame(string game_file_name, bool new_file);
+    GuessingGame(string game_file_name);
     ~GuessingGame();
     void beginGame();
     void setGameTree(BinaryGuessTree *new_game_tree);
