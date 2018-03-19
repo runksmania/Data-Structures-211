@@ -22,6 +22,22 @@ BinaryGuessTree::BinaryGuessTree(string prev_tree_file_name)
 
 BinaryGuessTree::~BinaryGuessTree()
 {
+    deconstructorHelper(_root);
+}
+
+void BinaryGuessTree::deconstructorHelper(BinaryNode<string> *node)
+{
+    if (node == nullptr)
+    {
+        return;
+    }
+    else if(!node->isLeaf())
+    {
+        deconstructorHelper(node->getLeftChild());
+        deconstructorHelper(node->getRightChild());
+    }
+
+    delete node;
 }
 
 void BinaryGuessTree::setRoot(BinaryNode<string> *node)

@@ -25,6 +25,7 @@ public:
     BinaryGuessTree(string prev_tree_file_name);
 
     ~BinaryGuessTree();
+    void deconstructorHelper(BinaryNode<string> *node);
     
     void setRoot(BinaryNode<string> *node);
     BinaryNode<string>* getRoot();

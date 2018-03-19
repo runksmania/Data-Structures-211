@@ -8,16 +8,10 @@ GuessingGame::GuessingGame()
     _game_tree = nullptr;
 }
 
-GuessingGame::GuessingGame(string game_file_name, bool new_file)
+GuessingGame::GuessingGame(string game_file_name)
 {
-    if (new_file)
-    {
-        _game_tree = new BinaryGuessTree("game1.txt");
-    }
-    else
-    {
-        _game_tree = new BinaryGuessTree(game_file_name);
-    }
+    _game_file = game_file_name;
+    _game_tree = new BinaryGuessTree(_game_file);
 }
 
 GuessingGame::~GuessingGame()
@@ -27,7 +21,9 @@ GuessingGame::~GuessingGame()
 
 void GuessingGame::beginGame()
 {
-    string user_retry = "N", save_file = "", user_save = "";
+    string user_retry = "N", save_file = "";
+
+    cout << "Time to play 20 questions.\nPick a Object, Place, or creature and I'll try to guess it.\n\n";
 
     do
     {
@@ -73,25 +69,40 @@ void GuessingGame::beginGame()
                     getline(cin, question);
                     cout << endl;
 
+                    if (question[question.size() - 1] != '?')
+                    {
+                        question += '?';
+                    }
+
                     cout << "Enter the answer to this question. (Y)es or (N)o: \n";
                     getline(cin, question_answer);
                     cout << endl;
 
-                    BinaryNode<string> *temp = new BinaryNode<string>{ previous->getValue() };
-                    previous->setValue(question);
+                    BinaryNode<string> *new_answer = new BinaryNode<string>{ "Is it a " + correct_answer + "?" };
+                    BinaryNode<string> *new_question = new BinaryNode<string>{ question };
 
-                    if (question_answer == "Y" || question_answer == "y" || question_answer == "Yes" || question_answer == "yes")
+                    if (previous->getLeftChild() == current)
                     {
-                        previous->setRightChild(current);
-                        previous->setLeftChild(temp);
+                        previous->setLeftChild(new_question);
                     }
                     else
                     {
-                        previous->setLeftChild(current);
-                        previous->setRightChild(temp);
+                        previous->setRightChild(new_question);
                     }
 
-                    cout << "Game Over.\nWould you like to play again?\n Enter (Y)es or (N)o: ";
+
+                    if (question_answer == "Y" || question_answer == "y" || question_answer == "Yes" || question_answer == "yes")
+                    {
+                        new_question->setRightChild(new_answer);
+                        new_question->setLeftChild(current);
+                    }
+                    else
+                    {
+                        new_question->setRightChild(current);
+                        new_question->setLeftChild(new_answer);
+                    }
+
+                    cout << "Game Over.\nWould you like to play again?\nEnter (Y)es or (N)o: ";
                     getline(cin, user_retry);
                     cout << endl;
                 }
@@ -106,13 +117,7 @@ void GuessingGame::beginGame()
 
     } while (user_retry == "Y" || user_retry == "y" || user_retry == "Yes" || user_retry == "yes");
 
-    cout << "Would you like to save the tree?\n Enter (Y)es or (N)o: ";
-    getline(cin, user_save);
-    cout << "\nEnter a filename: ";
-    getline(cin, save_file);
-    cout << endl;
-
-    _game_tree->treeToFile(save_file);
+    _game_tree->treeToFile(_game_file);
 }
 
 void GuessingGame::setGameTree(BinaryGuessTree *new_game_tree)

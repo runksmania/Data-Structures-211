@@ -1,9 +1,45 @@
+Is it a creature?
+Is it a place?
+Is it food?
+*piano?
+*pizza?
+Is it in europe?
+*United States of America?
+Is it a country?
+*Paris?
+*Italy?
 Does it walk on 4 legs?
+Does it fly?
 Is it a mammal?
-*fly?
+Is it a prehistoric creature?
+Does it have 8 legs?
 *centipede?
+*spider?
+*dinosaur
+Does it live in the water?
+Is it pink and long legged?
+*human?
+*flamingo?
+*whale?
+Is it an insect?
+*bird?
+*butterfly?
 Does it purr?
 Does it howl?
+Is it bigger than a human?
+Is it a very slow creature?
 *mouse?
+*sloth?
+Does it have a very long neck?
+Does it have a trunk?
+Is it a prehistoric creature?
+*hippo?
+*triceratops?
+*elephant?
+*giraffe?
+Is it a domestic animal?
+*wolf?
 *dog?
+Is it a domestic animal?
+*jaguar?
 *cat?
