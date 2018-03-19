@@ -188,18 +188,17 @@ int main(void)
     cout << boolalpha << "Height: " << getHeight(tree.getRoot()) << " (expected: 2)" << endl << endl;
 
     tree.addElement(11);
-    tree.addElement(3);
 
     cout << boolalpha << "Is Full: " << isFull(&tree) << " (expected: FALSE)" << endl;
     cout << boolalpha << "Is Complete: " << isComplete(&tree) << " (expected: FALSE)" << endl;
-    cout << boolalpha << "Is AVL: " << isAvl(&tree) << " (expected: TRUE)" << endl;
+    cout << boolalpha << "Is AVL: " << isAvl(&tree) << " (expected: FALSE)" << endl;
     cout << boolalpha << "Height: " << getHeight(tree.getRoot()) << " (expected: 3)" << endl << endl;
 
     tree.addElement(13);
     tree.addElement(1);
     tree.addElement(7);
 
-    cout << boolalpha << "Is Full: " << isFull(&tree) << " (expected: FALSE)" << endl;
+    cout << boolalpha << "Is Full: " << isFull(&tree) << " (expected: TRUE)" << endl;
     cout << boolalpha << "Is Complete: " << isComplete(&tree) << " (expected: FALSE)" << endl;
     cout << boolalpha << "Is AVL: " << isAvl(&tree) << " (expected: TRUE)" << endl;
     cout << boolalpha << "Height: " << getHeight(tree.getRoot()) << " (expected: 3)" << endl << endl;
