@@ -1,3 +1,13 @@
+/*
+Assignment: PA
+Description: Create a 20 questions style guessing game.
+Author: Michael Cottrell
+HSU ID: 946839472
+Completion Time: 6 hours.
+In completing this program, I received help from the following people:
+N/A
+*/
+
 #pragma once
 #ifndef BINARY_GUESS_TREE_H
 #define BINARY_GUESS_TREE_H
@@ -18,6 +28,7 @@ private:
     void treeToVector(BinaryNode<string> *node, vector<string> &tree_vector);
     BinaryNode<string>* treeFromFileHelper(BinaryNode<string>* node, vector<string> &tree_vector, int &count);
     void recursPreOrderTraversalHelper(BinaryNode<string> *node);
+    void deconstructorHelper(BinaryNode<string> *node);
 
 public:
     BinaryGuessTree();
@@ -25,7 +36,6 @@ public:
     BinaryGuessTree(string prev_tree_file_name);
 
     ~BinaryGuessTree();
-    void deconstructorHelper(BinaryNode<string> *node);
     
     void setRoot(BinaryNode<string> *node);
     BinaryNode<string>* getRoot();

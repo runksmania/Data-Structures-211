@@ -1,3 +1,13 @@
+/*
+Assignment: PA
+Description: Create a 20 questions style guessing game.
+Author: Michael Cottrell
+HSU ID: 946839472
+Completion Time: 6 hours.
+In completing this program, I received help from the following people:
+N/A
+*/
+
 #include "GuessingGame.h"
 #include <iostream>
 
@@ -5,7 +15,8 @@ using namespace std;
 
 GuessingGame::GuessingGame()
 {
-    _game_tree = nullptr;
+    _game_tree = new BinaryGuessTree();
+    _game_file = "";
 }
 
 GuessingGame::GuessingGame(string game_file_name)
@@ -21,44 +32,52 @@ GuessingGame::~GuessingGame()
 
 void GuessingGame::beginGame()
 {
-    string user_retry = "N", save_file = "";
+    string play_again = "N";
 
     cout << "Time to play 20 questions.\nPick a Object, Place, or creature and I'll try to guess it.\n\n";
 
     do
     {
-        string user_input = "";
+        string user_answer = "";
         bool game_over = false;
+
+        //Variables to track our current and previous nodes.
         BinaryNode<string> *previous = _game_tree->getRoot();
         BinaryNode<string> *current = previous;
 
         do
         {
+            //Cout the differentiation_question of our current node and get the answer.
             cout << current->getValue() << endl << "Enter (Y)es or (N)o: ";
-            getline(cin, user_input);
+            getline(cin, user_answer);
             cout << endl;
 
-            if (user_input == "Y" || user_input == "y" || user_input == "Yes" || user_input == "yes")
+            if (user_answer == "Y" || user_answer == "y" || user_answer == "Yes" || user_answer == "yes")
             {
+                //If there are further questions the guess was correct.
                 if (current->isLeaf())
                 {
                     game_over = true;
                     cout << "Yay! I got it correct! \nWould you like to play again?\n Enter (Y)es or (N)o: ";
-                    getline(cin, user_retry);
+                    getline(cin, play_again);
                     cout << endl;
                 }
                 else
                 {
+                    //Yes answers to the previous tree questions are stored on the right.
                     previous = current;
                     current = current->getRightChild();
                 }
             }
             else
             {
+                //If there are no further questions the guess was incorrect.
                 if (current->isLeaf())
                 {
                     game_over = true;
-                    string correct_answer = "", question = "", question_answer = "", current_question;
+
+                    //Variables to track the user inputs and the tree so the tree can be updated so it can guess the correct answer in the future.
+                    string correct_answer = "", differentiation_question = "", question_answer = "", current_question;
                     current_question = current->getValue();
 
                     cout << "Hmm... Seems that you beat me.\n  Enter the correct answer: ";
@@ -66,12 +85,13 @@ void GuessingGame::beginGame()
                     cout << endl;
 
                     cout << "Enter a yes or no question that would allow me to differentiate between a " << current_question.substr(8, current_question.size() - 9) << " and a " << correct_answer << ":\n";
-                    getline(cin, question);
+                    getline(cin, differentiation_question);
                     cout << endl;
 
-                    if (question[question.size() - 1] != '?')
+                    //If the user question doesn't have a ? at the end add it.
+                    if (differentiation_question[differentiation_question.size() - 1] != '?')
                     {
-                        question += '?';
+                        differentiation_question += '?';
                     }
 
                     cout << "Enter the answer to this question. (Y)es or (N)o: \n";
@@ -79,18 +99,28 @@ void GuessingGame::beginGame()
                     cout << endl;
 
                     BinaryNode<string> *new_answer = new BinaryNode<string>{ "Is it a " + correct_answer + "?" };
-                    BinaryNode<string> *new_question = new BinaryNode<string>{ question };
+                    BinaryNode<string> *new_question = new BinaryNode<string>{ differentiation_question };
 
-                    if (previous->getLeftChild() == current)
+                    //If it was a new game previous and current will point to the same object.
+                    if (previous == current)
                     {
-                        previous->setLeftChild(new_question);
+                        _game_tree->setRoot(new_question);
                     }
-                    else
+                    else 
                     {
-                        previous->setRightChild(new_question);
+                        //If the answer guessed was the left child set previous left child to the differentiation question.
+                        if (previous->getLeftChild() == current)
+                        {
+                            previous->setLeftChild(new_question);
+                        }
+                        else
+                        {
+                            previous->setRightChild(new_question);
+                        }
                     }
 
-
+                    //If the answer to the users differentiation question was yes we set the correct answer to the guess on the right, and the incorrect answer to the left.
+                    //Otherwise the correct answer goes to the left, and the incorrect answer to the right.
                     if (question_answer == "Y" || question_answer == "y" || question_answer == "Yes" || question_answer == "yes")
                     {
                         new_question->setRightChild(new_answer);
@@ -103,11 +133,12 @@ void GuessingGame::beginGame()
                     }
 
                     cout << "Game Over.\nWould you like to play again?\nEnter (Y)es or (N)o: ";
-                    getline(cin, user_retry);
+                    getline(cin, play_again);
                     cout << endl;
                 }
                 else
                 {
+                    //No answers to the previous tree questions are stored on the left.
                     previous = current;
                     current = current->getLeftChild();
                 }
@@ -115,9 +146,31 @@ void GuessingGame::beginGame()
 
         } while (!game_over);
 
-    } while (user_retry == "Y" || user_retry == "y" || user_retry == "Yes" || user_retry == "yes");
+    } while (play_again == "Y" || play_again == "y" || play_again == "Yes" || play_again == "yes");
 
-    _game_tree->treeToFile(_game_file);
+
+    //If no previous save game file was loaded ask whether to save and for a filename.
+    //Else save the tree.
+    if (_game_file == "")
+    {
+        string save_or_not = "";
+        cout << "Would you like to save the game?\nEnter (Y)es or (N)o: \n";
+        getline(cin, save_or_not);
+
+        if (save_or_not == "no" || save_or_not == "No" || save_or_not == "n" || save_or_not == "N")
+        {
+            return;
+        }
+
+        cout << "Enter a save file name: \n";
+        getline(cin, _game_file);
+        _game_tree->treeToFile(_game_file);
+    }
+    else
+    {
+        _game_tree->treeToFile(_game_file);
+    }
+    
 }
 
 void GuessingGame::setGameTree(BinaryGuessTree *new_game_tree)
@@ -128,4 +181,14 @@ void GuessingGame::setGameTree(BinaryGuessTree *new_game_tree)
     }
 
     _game_tree = new_game_tree;
+}
+
+void GuessingGame::setGameTree(string game_file)
+{
+    if (_game_tree != nullptr)
+    {
+        delete _game_tree;
+    }
+
+    _game_tree = new BinaryGuessTree(game_file);
 }

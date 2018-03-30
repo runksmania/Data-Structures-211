@@ -1,5 +1,7 @@
 Does it walk on 4 legs?
 Does it fly?
+Does it have legs?
+*caterpillar?
 *centipede?
 Is it an insect?
 *bird?
@@ -8,4 +10,6 @@ Does it purr?
 Does it howl?
 *mouse?
 *dog?
+Is it a domestic animal?
+*tiger?
 *cat?

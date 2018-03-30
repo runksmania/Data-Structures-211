@@ -40,9 +40,6 @@
     <Text Include="game1.txt">
       <Filter>Resource Files</Filter>
     </Text>
-    <Text Include="game2.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
     <Text Include="game3.txt">
       <Filter>Resource Files</Filter>
     </Text>

@@ -1,3 +1,13 @@
+/*
+Assignment: PA
+Description: Create a 20 questions style guessing game.
+Author: Michael Cottrell
+HSU ID: 946839472
+Completion Time: 6 hours.
+In completing this program, I received help from the following people:
+N/A
+*/
+
 #ifndef BINARYNODE_H
 #define BINARYNODE_H
 #include <utility>
@@ -23,8 +33,6 @@ private:
     //disallow assignment operator
     BinaryNode<T> &operator=(const BinaryNode<T> &other);
     BinaryNode<T> &operator=(BinaryNode<T> &&other);
-
-protected:
 
 public:
 
