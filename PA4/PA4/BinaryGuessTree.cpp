@@ -8,8 +8,6 @@ In completing this program, I received help from the following people:
 N/A
 */
 
-#include <fstream>
-#include <iostream>
 #include "BinaryGuessTree.h"
 
 using namespace std;
@@ -20,8 +18,8 @@ BinaryGuessTree::BinaryGuessTree()
     _root = new BinaryNode<string>{ "Is it a creature?" };
     _root->setLeftChild(new BinaryNode<string>{ "Is it a place?" });
     _root->setRightChild(new BinaryNode<string>{ "Is it a cat?" });
-    _root->getLeftChild()->setRightChild(new BinaryNode<string>{ "Is it Paris?" });
-    _root->getLeftChild()->setLeftChild(new BinaryNode<string>{ "Is it pizza?" });
+    _root->getLeftChild()->setRightChild(new BinaryNode<string>{ "Is it a Paris?" });
+    _root->getLeftChild()->setLeftChild(new BinaryNode<string>{ "Is it a pizza?" });
 }
 
 BinaryGuessTree::BinaryGuessTree(BinaryNode<string> *node)
@@ -53,6 +51,7 @@ void BinaryGuessTree::deconstructorHelper(BinaryNode<string> *node)
         deconstructorHelper(node->getRightChild());
     }
 
+    //Delete if leaf node or after its children have been deleted.
     delete node;
 }
 

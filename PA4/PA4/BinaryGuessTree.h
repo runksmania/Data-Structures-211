@@ -3,7 +3,7 @@ Assignment: PA
 Description: Create a 20 questions style guessing game.
 Author: Michael Cottrell
 HSU ID: 946839472
-Completion Time: 6 hours.
+Completion Time: 8 hours.
 In completing this program, I received help from the following people:
 N/A
 */
@@ -16,16 +16,6 @@ N/A
 #include <vector>
 #include <fstream>
 #include <iostream>
-/*
-Assignment: PA
-Description: Create a 20 questions style guessing game.
-Author: Michael Cottrell
-HSU ID: 946839472
-Completion Time: 8 hours.
-In completing this program, I received help from the following people:
-N/A
-*/
-
 #include "BinaryNode.h"
 
 using namespace std;

@@ -8,8 +8,8 @@ In completing this program, I received help from the following people:
 N/A
 */
 
-#include "GuessingGame.h"
 #include <iostream>
+#include "GuessingGame.h"
 
 using namespace std;
 
