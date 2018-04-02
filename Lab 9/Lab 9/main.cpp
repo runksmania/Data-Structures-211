@@ -33,25 +33,50 @@ bool hasUniqueChars(string text)
 
 bool isAnagram(string first, string second)
 {
-    char letters[26];
+    int letters[26];
     int letter_count = 0;
+    
+    for(auto&& num : letters)
+    {
+        num = 0;
+    }
 
     for (auto&& ch : first)
     {
         int letter_index = tolower(ch) - 'a';
-        letters[letter_index] = ch;
-        letter_count++;
+        
+        if(ch != ' ')
+        {
+            if(letter_index < 0 || letter_index > 25)
+            {
+                return false;
+            }
+            
+            letters[letter_index]++;
+            letter_count++;
+        }
     }
 
     for (auto&& ch : second)
     {
         int letter_index = tolower(ch) - 'a';
-        letter_count--;
-
-        if (letters[letter_index] != ch)
+        
+        if(ch != ' ')
         {
-            return false;
+            if(letter_index < 0 || letter_index > 25)
+            {
+                return false;
+            }
+            
+            if (letters[letter_index] < 1)
+            {
+                return false;
+            }
+            
+            letters[letter_index]--;
+            letter_count--;
         }
+        
     }
 
     if (letter_count != 0)
@@ -229,6 +254,18 @@ int main(void)
     cout << "abcabcab, 0: " <<
         mostCommonSubstring("abcabcab", 0)
         << " (expected: NULL)"
+        << endl;
+    
+    //test case #9
+    cout << "apple, aplle: " <<
+        isAnagram("apple", "aplle")
+        << " (expected: false)"
+        << endl;
+        
+    //test case #10
+    cout << "anagram, nag a ram: " <<
+        isAnagram("anagram", "nag a ram")
+        << " (expected: true)"
         << endl;
 
     return 0;
